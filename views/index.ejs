@@ -1,13 +1,19 @@
 <!-- views/pages/index.ejs -->
 
 <!DOCTYPE html>
-<html lang="en" ng-app="inCall">
+<html lang="en" ng-app="inCallApp">
 <head>
     <% include ./partials/head %>
     <script src="/bower_components/angular/angular.js"></script>
     <script src="/bower_components/angular-route/angular-route.js"></script>
+    <script src="/javascripts/app/app.module.js"></script>
+    <script src="/javascripts/app/app.config.js"></script>
+    <script src="/javascripts/app/people-list/people-list.module.js"></script>
+    <script src="/javascripts/app/people-list/people-list.component.js"></script>
+    <script src="/javascripts/app/person-detail/person-detail.module.js"></script>
+    <script src="/javascripts/app/person-detail/person-detail.component.js"></script>
 </head>
-<body class="container" ng-controller="PeopleListController">
+<body class="container">
 
     <header>
         <% include ./partials/header %>
@@ -18,12 +24,8 @@
             <h1>This is great</h1>
             <p>Welcome to templating using EJS</p>
         </div>
-        <ul>
-          <li ng-repeat="person in people">
-            <span>{{person.name}}</span>
-          </li>
-        </ul>
     </main>
+    <div ng-view></div>
 
     <footer>
         <% include ./partials/footer %>

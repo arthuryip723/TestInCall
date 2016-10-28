@@ -1,9 +1,9 @@
-var inCall = angular.module('inCall', []);
+// var inCall = angular.module('inCall', []);
 
-inCall.controller('PeopleListController', function PeopleListController($scope) {
-  $scope.people = [{
-    name: 'Amy',
-  }, {
-    name: 'Tracy',
-  }];
-});
+// inCall.controller('PeopleListController', function PeopleListController($scope) {
+//   $scope.people = [{
+//     name: 'Amy',
+//   }, {
+//     name: 'Tracy',
+//   }];
+// });
