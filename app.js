@@ -5,9 +5,13 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+var mongoose = require('mongoose');
+
 var passport = require('passport');
 var Strategy = require('passport-local').Strategy;
 var db = require('./db');
+
+mongoose.connect('mongodb://localhost/incall');
 
 passport.use(new Strategy(
   function(username, password, cb) {
@@ -39,6 +43,7 @@ passport.deserializeUser(function(id, cb) {
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
+var people =require('./routes/people');
 
 var app = express();
 
@@ -88,6 +93,7 @@ app.get('/logout',
 
 app.use('/', routes);
 app.use('/users', users);
+app.use('/api/people', people);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
