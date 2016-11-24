@@ -51,11 +51,11 @@ var joe = new Person({
 alex.save();
 joe.save();
 var comment1 = new Comment({
-    title: "Alex is great.",
+    content: "Alex is great.",
     person: alex._id,
 });
 var comment2 = new Comment({
-    title: 'Joe is so-so.',
+    content: 'Joe is so-so.',
     person: joe._id,
 });
 comment1.save();
