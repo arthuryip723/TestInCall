@@ -10,4 +10,12 @@ router.get('/', function(req, res, next) {
   });
 });
 
+router.get('/:id', function(req, res, next) {
+  // res.send({abc:'def'});
+  Person.findOne({_id: req.params.id}, function(error, person) {
+    // res.json({id: req.params.id, abc: 'def'});
+    res.send(person);
+  })
+});
+
 module.exports = router;
