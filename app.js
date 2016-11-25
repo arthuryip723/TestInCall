@@ -58,6 +58,7 @@ app.set('view engine', 'ejs');
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+// app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/bower_components', express.static(path.join(__dirname, 'bower_components')));
@@ -67,6 +68,9 @@ app.use(require('express-session')({ secret: 'keyboard cat', resave: false, save
 // session.
 app.use(passport.initialize());
 app.use(passport.session());
+
+// app.use(express.json());       // to support JSON-encoded bodies
+// app.use(express.urlencoded()); // to support URL-encoded bodies
 
 // Define routes.
 // app.get('/',

@@ -65,3 +65,12 @@ joe.comments.push(comment2._id);
 
 alex.save();
 joe.save();
+
+var aaron = new Person({ name: 'Aaron' });
+aaron.save(function(err) {
+  var comment3 = new Comment({
+    content: "Arron is awesome.",
+    person: aaron._id,
+  });
+  comment3.save();
+});
