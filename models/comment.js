@@ -5,6 +5,7 @@ var commentSchema = new Schema({
   content: String,
   person: {
     type: Schema.ObjectId,
+    // type: Number,
     ref: 'Person'
   },
 });

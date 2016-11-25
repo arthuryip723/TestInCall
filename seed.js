@@ -60,3 +60,8 @@ var comment2 = new Comment({
 });
 comment1.save();
 comment2.save();
+alex.comments.push(comment1._id);
+joe.comments.push(comment2._id);
+
+alex.save();
+joe.save();
