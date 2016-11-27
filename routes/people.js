@@ -20,7 +20,10 @@ router.post('/:id/comments', function(req, res, next) {
       person: person._id
     });
     comment.save(function(err, comment){
-      res.send(comment);
+      person.comments.push(comment);
+      person.save(function(err, person){
+        res.send(comment);
+      });
     });
   }); 
 });
