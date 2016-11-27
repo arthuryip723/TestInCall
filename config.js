@@ -8,7 +8,9 @@ var config = {
             connectionString: "mongodb://localhost:27017/incall-dev",
             databaseName: "incall-dev"
         }
-    }
+    },
+    'secret': 'ilovescotchyscotch',
+    'database': 'mongodb://localhost:27017/incall',
 };
 
 module.exports = config;

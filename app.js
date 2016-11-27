@@ -9,6 +9,7 @@ var mongoose = require('mongoose');
 
 var passport = require('passport');
 var Strategy = require('passport-local').Strategy;
+var User = require('./models/user');
 var db = require('./db');
 
 mongoose.connect('mongodb://localhost/incall');
@@ -45,6 +46,7 @@ var routes = require('./routes/index');
 var users = require('./routes/users');
 var people = require('./routes/people');
 var comments = require('./routes/comments');
+var api = require('./routes/api');
 
 var app = express();
 
@@ -95,11 +97,26 @@ app.get('/logout',
     res.redirect('/');
   });
 
+app.get('/setup', function(req, res) {
+  var nick = new User({
+    name: 'Nick Cerminara',
+    password: 'password',
+    admin: true,
+  });
+
+  nick.save(function(err) {
+    if (err) throw err;
+
+    console.log('User saved successfully');
+    res.json({ success: true });
+  });
+});
 
 app.use('/', routes);
 app.use('/users', users);
-app.use('/api/people', people);
-app.use('/api/comments', comments);
+app.use('/api2/people', people);
+app.use('/api2/comments', comments);
+app.use('/api', api);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
