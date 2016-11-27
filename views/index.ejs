@@ -4,10 +4,15 @@
 <html lang="en" ng-app="inCallApp">
 <head>
     <% include ./partials/head %>
+    <script src="/bower_components/jquery/dist/jquery.js"></script>
     <script src="/bower_components/angular/angular.js"></script>
+    <script src="/bower_components/angular-resource/angular-resource.js"></script>
     <script src="/bower_components/angular-route/angular-route.js"></script>
     <script src="/javascripts/app/app.module.js"></script>
     <script src="/javascripts/app/app.config.js"></script>
+    <script src="/javascripts/app/core/core.module.js"></script>
+    <script src="/javascripts/app/core/people/people.module.js"></script>
+    <script src="/javascripts/app/core/people/people.service.js"></script>
     <script src="/javascripts/app/people-list/people-list.module.js"></script>
     <script src="/javascripts/app/people-list/people-list.component.js"></script>
     <script src="/javascripts/app/person-detail/person-detail.module.js"></script>
@@ -24,8 +29,8 @@
             <h1>This is great</h1>
             <p>Welcome to templating using EJS</p>
         </div>
+        <div ng-view></div>
     </main>
-    <div ng-view></div>
 
     <footer>
         <% include ./partials/footer %>
