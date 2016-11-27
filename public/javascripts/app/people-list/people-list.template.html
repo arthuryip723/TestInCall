@@ -2,5 +2,5 @@
   People List
 </div>
 <ul>
-  <li ng-repeat="person in $ctrl.people">{{ person.name }}</li>
+  <li ng-repeat="person in $ctrl.people"><a href="#!/person/{{ person._id }}">{{ person.name }}</a></li>
 </ul>
