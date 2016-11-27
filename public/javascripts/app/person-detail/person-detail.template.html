@@ -1,2 +1,13 @@
 <div>Person Detail</div>
 <div>Name: {{ $ctrl.person.name }}</div>
+<div>
+  <div>Comments:</div>
+  <ul>
+    <li ng-repeat="comment in $ctrl.person.comments">{{ comment.content }}</li>
+  </ul>
+  <form ng-submit="$ctrl.submit()">
+    <p>Add a comment</p>
+    <textarea ng-model="$ctrl.content"></textarea><br>
+    <button>Comment</button>
+  </form>
+</div>

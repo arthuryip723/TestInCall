@@ -8,7 +8,6 @@ angular.
       return $resource('api2/people/:id', {}, {
         query: {
           method: 'GET',
-          // params: {phoneId: 'phones'},
           isArray: true,
         }
       });
