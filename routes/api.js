@@ -7,8 +7,7 @@ var config = require('../config');
 router.use(function(req, res, next) {
   // console.log(req.originalUrl);
   if (req.originalUrl == '/api/authenticate') {
-    next();
-    return;
+    return next();
   }
   var token = req.body.token || req.query.token || req.headers['x-access-token'];
 
