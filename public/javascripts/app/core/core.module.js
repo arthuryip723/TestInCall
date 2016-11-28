@@ -1,4 +1,4 @@
 'use strict';
 
 // Define the `core` module
-angular.module('core', ['core.people', 'core.comment']);
+angular.module('core', ['core.people', 'core.comment', 'core.authentication']);

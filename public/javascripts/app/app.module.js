@@ -5,4 +5,5 @@ angular.module('inCallApp', [
   'core',
   'peopleList',
   'personDetail',
+  'login',
 ]);

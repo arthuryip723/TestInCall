@@ -8,6 +8,9 @@ angular.module('inCallApp').config(['$locationProvider', '$routeProvider',
       when('/person/:personId', {
         template: '<person-detail></person-detail>'
       }).
+      when('/login', {
+        template: '<login></login>'
+      }).
       otherwise('/people')
   }
 ]);
