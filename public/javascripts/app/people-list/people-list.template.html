@@ -1,6 +1,16 @@
 <div>
   People List
 </div>
-<ul>
+<!-- <ul>
   <li ng-repeat="person in $ctrl.people"><a href="#!/person/{{ person._id }}">{{ person.name }}</a></li>
-</ul>
+</ul> -->
+<div class="row">
+  <div class="col-lg-4 person-div" ng-repeat="person in $ctrl.people">
+    <div>
+      <img src="/images/avatar.jpg"/>
+    </div>
+    <div class="link-div">
+      <a href="#!/person/{{ person._id }}">{{ person.name }}</a>
+    </div>
+  </div>
+</div>
