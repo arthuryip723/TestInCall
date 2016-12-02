@@ -11,6 +11,14 @@ a {
 
 }
 
-.link-div {
+.name-div {
+  text-align: center;
+}
+
+.avatar-img {
+  /*width: 100%;*/
+}
+
+.avatar-div {
   text-align: center;
 }

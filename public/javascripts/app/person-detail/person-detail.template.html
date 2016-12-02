@@ -1,6 +1,9 @@
 <div>Person Detail</div>
 <div>Name: {{ $ctrl.person.name }}</div>
 <div>
+  <div>
+    <img class="avatar-img" src="/images/avatar.jpg"/>
+  </div>
   <div>Comments:</div>
   <ul>
     <li ng-repeat="comment in $ctrl.person.comments">{{ comment.content }}</li>
