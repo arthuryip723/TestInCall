@@ -5,6 +5,9 @@ angular.module('inCallApp').config(['$locationProvider', '$routeProvider',
       when('/people', {
         template: '<people-list></people-list>'
       }).
+      when('/people/new', {
+        template: '<person-new></person-new>'
+      }).
       when('/person/:personId', {
         template: '<person-detail></person-detail>'
       }).

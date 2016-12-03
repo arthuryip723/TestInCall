@@ -42,4 +42,13 @@ router.get('/:id', function(req, res, next) {
   });
 });
 
+router.post('/', function(req, res, next) {
+  var person = new Person({
+    name: req.body.name,
+  });
+  person.save(function(err, person) {
+    res.send(person);
+  });
+});
+
 module.exports = router;
