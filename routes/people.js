@@ -17,7 +17,8 @@ router.post('/:id/comments', function(req, res, next) {
     // res.send({result: 'success'});
     var comment = new Comment({
       content: req.body.content,
-      person: person._id
+      person: person._id,
+      rating: req.body.rating,
     });
     comment.save(function(err, comment){
       person.comments.push(comment);

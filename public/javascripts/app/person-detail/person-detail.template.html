@@ -4,6 +4,7 @@
   <div>
     <img class="avatar-img" src="/images/avatar.jpg"/>
   </div>
+  <div>Rating: {{ $ctrl.averageRating() }}</div>
   <div>Comments:</div>
   <ul class="comments-ul">
     <li ng-repeat="comment in $ctrl.person.comments">
@@ -19,6 +20,14 @@
   <form ng-submit="$ctrl.submit()">
     <p>Add a comment</p>
     <textarea ng-model="$ctrl.content"></textarea><br>
+    <label>Rating:</label>
+    <select ng-model="$ctrl.rating">
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
+    </select>
     <button>Comment</button>
   </form>
 </div>
