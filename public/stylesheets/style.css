@@ -7,6 +7,12 @@ a {
   color: #00B7FF;
 }
 
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
 .person-div {
 
 }
@@ -21,4 +27,12 @@ a {
 
 .avatar-div {
   text-align: center;
+}
+
+.comments-ul li {
+  border-bottom: 1px solid black;
+}
+
+.comments-ul li:first-child {
+  border-top: 1px solid black;
 }

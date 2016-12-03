@@ -5,8 +5,16 @@
     <img class="avatar-img" src="/images/avatar.jpg"/>
   </div>
   <div>Comments:</div>
-  <ul>
-    <li ng-repeat="comment in $ctrl.person.comments">{{ comment.content }}</li>
+  <ul class="comments-ul">
+    <li ng-repeat="comment in $ctrl.person.comments">
+      <div>
+        <div class="clearfix">
+          <div class="pull-left">Guest:</div>
+          <div class="pull-right">{{ comment.created_at }}</div>
+        </div>
+        {{ comment.content }}
+      </div>
+    </li>
   </ul>
   <form ng-submit="$ctrl.submit()">
     <p>Add a comment</p>
