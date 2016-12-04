@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var Person = require('../models/person.js');
 var Comment = require('../models/comment.js');
+var User = require('../models/user.js');
 var helpers = require('./helpers.js');
 
 /* GET users listing. */
@@ -45,9 +46,17 @@ router.get('/:id', function(req, res, next) {
   });
 });
 
+router.post('/', helpers.authenticate);
+
 router.post('/', function(req, res, next) {
+  // find the current user
+  // console.log(req.decoded);
+  // console.log(req.decoded.get('_id'));
+  var user = new User(req.decoded._doc);
+  console.log(user);
   var person = new Person({
     name: req.body.name,
+    user: user.get('_id'),
   });
   person.save(function(err, person) {
     res.send(person);
