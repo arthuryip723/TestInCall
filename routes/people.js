@@ -52,14 +52,18 @@ router.post('/', function(req, res, next) {
   // find the current user
   // console.log(req.decoded);
   // console.log(req.decoded.get('_id'));
-  var user = new User(req.decoded._doc);
-  console.log(user);
-  var person = new Person({
-    name: req.body.name,
-    user: user.get('_id'),
-  });
-  person.save(function(err, person) {
-    res.send(person);
+  var user = User.findById(req.decoded._doc._id, function(err, user) {
+    // console.log(user);
+    var person = new Person({
+      name: req.body.name,
+      user: user._id,
+    });
+    person.save(function(err, person) {
+      user.people.push(person);
+      user.save(function(err, user) {
+        res.send(person);
+      });
+    });
   });
 });
 
