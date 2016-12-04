@@ -5,7 +5,6 @@ var jwt = require('jsonwebtoken');
 var config = require('../config');
 
 router.use(function(req, res, next) {
-  // console.log(req.originalUrl);
   if (req.originalUrl == '/api/authenticate') {
     return next();
   }

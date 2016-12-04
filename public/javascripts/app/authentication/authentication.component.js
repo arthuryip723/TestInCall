@@ -11,7 +11,11 @@ angular.
       // I should use a success function here.
       self.submit = function () {
         Authentication.signUp({name: self.name, password: self.password}, function(user) {
-          $window.location.href = '/';
+          // launch a request for authentication
+          Authentication.signIn(user, function(data) {
+            console.log(data);
+            $window.location.href = '/';
+          })
         });
         // console.log('submitting...');
       };

@@ -11,7 +11,7 @@ angular.
       signIn(data, success) {
         $http({
           method: 'POST',
-          url: '/api2/authentication',
+          url: '/api/authenticate',
           data: data,
         }).then(success);
       },
