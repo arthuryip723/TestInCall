@@ -10,7 +10,7 @@ angular.
       controllerAs: 'headerCtrl',
       controller: ['Authentication', function HeaderController(Authentication) {
         var self = this;
-        self.isLoggedIn = Authentication.isLoggedIn;
+        self.isSignedIn = Authentication.isSignedIn;
         // self.isLoggedIn = function(){
         //   console.log('hello');
         //   return true;

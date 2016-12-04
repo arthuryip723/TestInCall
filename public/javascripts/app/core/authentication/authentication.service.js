@@ -4,9 +4,12 @@ angular.
   module('core.authentication').
   factory('Authentication', ['$resource', '$rootScope', function($resource, $rootScope) {
     return {
-      isLoggedIn() {
-        // return false;
-        return true;
+      isSignedIn() {
+        return false;
+        // return true;
       },
+      signIn() {},
+      signOut() {},
+      signUp() {},
     };
   }]);
