@@ -46,6 +46,7 @@ router.post('/users', function(req, res, next) {
   let user = new User({
     name: req.body.name,
     password: req.body.password,
+    role: req.body.role,
   });
   user.save(function (err, user) {
     // i will need to authenticate the user here as well.

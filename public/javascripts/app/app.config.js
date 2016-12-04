@@ -43,6 +43,9 @@ config(['$locationProvider', '$routeProvider', '$httpProvider',
       when('/signin', {
         template: '<sign-in></sign-in>'
       }).
+      when('/signup-seller', {
+        template: '<sign-up-seller></sign-up-seller>',
+      }).
       otherwise('/people');
     $httpProvider.interceptors.push('tokenInterceptor');
   }
@@ -54,9 +57,16 @@ run(['$rootScope', '$location', 'Authentication', function run($rootScope, $loca
   // }
 
   $rootScope.$on('$locationChangeStart', function(event, next, current) {
-    var restrictedPage = $.inArray($location.path(), ['/', '/people', '/signin', '/signup']) === -1;
+    var restrictedPage = $.inArray($location.path(), ['/', '/people', '/signin', '/signup', '/signup-seller']) === -1;
+
     if (restrictedPage && !Authentication.isSignedIn()) {
       $location.path('/signin');
+      return;
+    }
+    var buyerRestrictedPage = $.inArray($location.path(), ['/people/new']) !== -1;
+    // var buyerRestrictedPage = true;
+    if (buyerRestrictedPage && !Authentication.isSeller()) {
+      $location.path('/');
     }
   });
 }]);

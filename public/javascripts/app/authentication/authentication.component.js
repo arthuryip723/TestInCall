@@ -22,12 +22,23 @@ angular.
       };
     }],
   }).
+  component('signUpSeller', {
+    templateUrl: '/javascripts/app/authentication/sign-up-seller.template.html',
+    controller: ['$location', 'Authentication', function SignUpController($location, Authentication){
+      var self = this;
+      self.submit = function () {
+        Authentication.signUpSeller({name: self.name, password: self.password}, function(resp) {
+          $location.path('/');
+        });
+      };
+    }],
+  }).
   component('signIn', {
     templateUrl: '/javascripts/app/authentication/sign-in.template.html',
     controller: ['$location', 'Authentication', function SignInController($location, Authentication) {
       var self = this;
       self.submit = function () {
-        Authentication.signIn({name: self.name, password: self.password}, function(user) {
+        Authentication.signIn({name: self.name, password: self.password}, function(resp) {
           $location.path('/');
         })
       }
