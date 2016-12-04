@@ -1,7 +1,7 @@
 angular.module('inCallApp').
-factory('tokenInterceptor', ['$cookies', function tokenInterceptor($cookies) {
+factory('tokenInterceptor', ['$q', '$cookies', '$location', /*'Authentication',*/ function tokenInterceptor($q, $cookies, $location/*, Authentication*/) {
   return {
-    request: function(config) {
+    request(config) {
       // console.log('intercepting...');
       config.headers = config.headers || {};
       if ($cookies.get('token')) {
@@ -10,6 +10,17 @@ factory('tokenInterceptor', ['$cookies', function tokenInterceptor($cookies) {
         config.headers['x-access-token'] = $cookies.get('token');
       }
       return config;
+    },
+    responseError(rejection) {
+      // if (rejection.status === 401)
+      //   Authentication.signOut();
+      // use authentication to logout
+      if (rejection.status === 401){
+        $cookies.remove('token');
+        $cookies.remove('user');
+        $location.path('/signin');
+      }
+      return $q.reject(rejection);
     },
   };
 }]).
