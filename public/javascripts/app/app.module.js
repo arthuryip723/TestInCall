@@ -6,6 +6,6 @@ angular.module('inCallApp', [
   'peopleList',
   'personDetail',
   'authentication',
-  'login',
+  // 'login',
   'header',
 ]);

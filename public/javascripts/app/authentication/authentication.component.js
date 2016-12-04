@@ -12,13 +12,24 @@ angular.
       self.submit = function () {
         Authentication.signUp({name: self.name, password: self.password}, function(user) {
           // launch a request for authentication
-          Authentication.signIn(user, function(data) {
-            console.log(data);  
-            // $window.location.href = '/';
-            $location.path('/');
-          })
+          $location.path('/');
+          // Authentication.signIn(user, function(data) {
+          //   console.log(data);  
+          //   // $window.location.href = '/';
+          // })
         });
         // console.log('submitting...');
       };
+    }],
+  }).
+  component('signIn', {
+    templateUrl: '/javascripts/app/authentication/sign-in.template.html',
+    controller: ['$location', 'Authentication', function SignInController($location, Authentication) {
+      var self = this;
+      self.submit = function () {
+        Authentication.signIn({name: self.name, password: self.password}, function(user) {
+          $location.path('/');
+        })
+      }
     }],
   });
