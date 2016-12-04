@@ -1,3 +1,3 @@
 'use strict';
 
-angular.module('core.authentication', ['ngResource']);
+angular.module('core.authentication', ['ngResource', 'ngCookies']);

@@ -11,6 +11,11 @@ angular.
       controller: ['Authentication', function HeaderController(Authentication) {
         var self = this;
         self.isSignedIn = Authentication.isSignedIn;
+        self.getUserName = Authentication.getUserName;
+        self.submit = function() {
+          Authentication.signIn({name: self.name, password: self.password});
+        };
+        self.signOut = Authentication.signOut;
         // self.isLoggedIn = function(){
         //   console.log('hello');
         //   return true;
