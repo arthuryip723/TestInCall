@@ -32,11 +32,15 @@ router.get('/', function(req, res) {
   res.json({ message: 'Welcome to the coolest API on earth.'});
 });
 
-router.get('/users', function(req, res) {
-  User.find({}, function(err, users) {
-    res.json(users);
-  });
-});
+// router.get('/users', function(req, res) {
+//   User.find({}, function(err, users) {
+//     // delete users[0].password;
+//     // user = users[0].toObject();
+//     // delete user.password;
+//     // res.json(user);
+//     res.json(users);
+//   });
+// });
 
 router.post('/users', function(req, res, next) {
   let user = new User({
@@ -50,12 +54,15 @@ router.post('/users', function(req, res, next) {
       expiresIn: '1440m',
     });
 
+    let userJson = user.toObject();
+    delete userJson.password;
+
     // res.json({
     //   success: true,
     //   message: 'Enjoy your token!',
     //   token: token,
     // });
-    res.json({success: true, token, user});
+    res.json({success: true, token, user: userJson});
   });
 });
 
@@ -75,11 +82,15 @@ router.post('/authenticate', function(req, res) {
           expiresIn: '1440m',
         });
 
+        let userJson = user.toObject();
+        delete userJson.password;
+
         res.json({
           success: true,
           message: 'Enjoy your token!',
           token,
-          user,
+          // user,
+          user: userJson,
         });
       }
     }
