@@ -2,14 +2,30 @@
 
 angular.
   module('core.authentication').
-  factory('Authentication', ['$resource', '$rootScope', function($resource, $rootScope) {
+  factory('Authentication', ['$http', '$rootScope', function($http, $rootScope) {
     return {
       isSignedIn() {
         return false;
         // return true;
       },
-      signIn() {},
-      signOut() {},
-      signUp() {},
+      signIn(data, success) {
+        $http({
+          method: 'POST',
+          url: '/api2/authentication',
+          data: data,
+        }).then(success);
+      },
+      signOut() {
+        // just take out the user information from cookie or localstorage in browser side
+      },
+      signUp(data, success) {
+        $http({
+          method: 'POST',
+          url: '/api2/users',
+          data: data,
+        }).then(success);
+        // console.log('signing up...');
+
+      },
     };
   }]);

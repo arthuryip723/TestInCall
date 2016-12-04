@@ -19,7 +19,7 @@ angular.
       var self = this;
       self.submit = function () {
         People.save({}, {name: self.name}, function(person) {
-          $window.location.href = '/'
+          $window.location.href = '/';
         })
       };
     }],

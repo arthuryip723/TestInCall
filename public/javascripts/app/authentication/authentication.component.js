@@ -4,10 +4,16 @@ angular.
   module('authentication').
   component('signUp', {
     templateUrl: '/javascripts/app/authentication/sign-up.template.html',
-    controller: ['Authentication', function SignUpController(Authentication){
+    controller: ['$window', 'Authentication', function SignUpController($window, Authentication){
       var self = this;
+      // here i'll need to use promise to go to next page.
+      // work on promise here until i am very familiar with promise
+      // I should use a success function here.
       self.submit = function () {
-        console.log('submitting...');
+        Authentication.signUp({name: self.name, password: self.password}, function(user) {
+          $window.location.href = '/';
+        });
+        // console.log('submitting...');
       };
     }],
   });

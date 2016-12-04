@@ -113,7 +113,7 @@ app.get('/setup', function(req, res) {
 });
 
 app.use('/', routes);
-app.use('/users', users);
+app.use('/api2/users', users);
 app.use('/api2/people', people);
 app.use('/api2/comments', comments);
 app.use('/api', api);
