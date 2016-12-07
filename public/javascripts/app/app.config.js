@@ -18,7 +18,7 @@ factory('tokenInterceptor', ['$q', '$cookies', '$location', /*'Authentication',*
       if (rejection.status === 401){
         $cookies.remove('token');
         $cookies.remove('user');
-        $location.path('/signin');
+        // $location.path('/signin');
       }
       return $q.reject(rejection);
     },
@@ -57,9 +57,12 @@ run(['$rootScope', '$location', 'Authentication', function run($rootScope, $loca
   // }
 
   $rootScope.$on('$locationChangeStart', function(event, next, current) {
-    var restrictedPage = $.inArray($location.path(), ['/', '/people', '/signin', '/signup', '/signup-seller']) === -1;
+    // console.log($location.path());
+    // debugger
+    var restrictedPage = $.inArray($location.path(), ['', '/', '/people', '/signin', '/signup', '/signup-seller']) === -1;
 
     if (restrictedPage && !Authentication.isSignedIn()) {
+      // debugger
       $location.path('/signin');
       return;
     }

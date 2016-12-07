@@ -32,9 +32,23 @@ angular.
           $location.path('/');
         })
       };
-      self.updateImage = function () {
-        console.log('changing...');
-        alert('changing...');
+      self.updateImage = function (event) {
+        // console.log('changing...');
+        // alert('changing...');
+        // First get the element.
+        // console.log(element);
+        // console.log(element.files);
+        self.currentFile = event.target.files[0];
+        var reader = new FileReader();
+
+        reader.onload = function(event) {
+          // alert('hello');
+          // console.log(event.target.result);
+          self.imageSource = event.target.result;
+          self.$apply();
+        };
+
+        reader.readAsDataURL(event.target.files[0]);
       };
     }],
   });;
