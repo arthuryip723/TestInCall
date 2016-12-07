@@ -1,4 +1,13 @@
 'use strict';
+angular.module('inCallApp').directive('customOnChange', function() {
+  return {
+    restrict: 'A',
+    link: function (scope, element, attrs) {
+      var onChangeFunc = scope.$eval(attrs.customOnChange);
+      element.bind('change', onChangeFunc);
+    }
+  };
+});
 
 angular.
   module('peopleList').
@@ -22,6 +31,10 @@ angular.
           // $window.location.href = '/';
           $location.path('/');
         })
+      };
+      self.updateImage = function () {
+        console.log('changing...');
+        alert('changing...');
       };
     }],
   });;

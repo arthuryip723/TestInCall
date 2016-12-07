@@ -2,5 +2,11 @@
 <form ng-submit="$ctrl.submit()">
   <label>Name: </label>
   <input type="text" ng-model="$ctrl.name">
+  <div>
+    <div>
+      <img class="preview">
+      <input type="file" name="image" ng-model="$ctrl.image" custom-on-change="$ctrl.updateImage">
+    </div>
+  </div>
   <button>Create</button>
 </form>
