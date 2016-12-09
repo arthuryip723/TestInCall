@@ -24,8 +24,9 @@ angular.
   }).
   component('personNew', {
     templateUrl: '/javascripts/app/people-list/person-new.template.html',
-    controller: ['$location', 'People', function PersonNewController($location, People) {
+    controller: ['$location', '$scope', 'People', function PersonNewController($location, $scope, People) {
       var self = this;
+      self.imageSource = 'abc';
       self.submit = function () {
         People.save({}, {name: self.name}, function(person) {
           // $window.location.href = '/';
@@ -45,10 +46,21 @@ angular.
           // alert('hello');
           // console.log(event.target.result);
           self.imageSource = event.target.result;
-          self.$apply();
+          // self.$apply();
+          // console.log(self.imageSource);
+          // alert('hello');
+          // self.imageSource = 'def';
+          $scope.$apply();
+          // console.log(self.imageSource);
         };
 
         reader.readAsDataURL(event.target.files[0]);
       };
+      // self.change1 = function (event) {
+      //   console.log(self.imageSource);
+      //   alert('hello');
+      //   console.log(self.imageSource);
+      //   // self.imageSource = "def";
+      // };
     }],
   });;
