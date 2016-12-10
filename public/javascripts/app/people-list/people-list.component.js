@@ -56,6 +56,10 @@ angular.
 
         reader.readAsDataURL(event.target.files[0]);
       };
+
+      self.addImage = function (event) {
+        console.log('adding image...');
+      };
       // self.change1 = function (event) {
       //   console.log(self.imageSource);
       //   alert('hello');
