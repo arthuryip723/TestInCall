@@ -48,5 +48,7 @@ ul {
   width: 240px;
   height: 320px;
   text-align: center;
-  line-height: 320px;
+  /*line-height: 320px;*/
+  display: table-cell;
+  vertical-align: middle;
 }
