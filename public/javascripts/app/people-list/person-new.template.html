@@ -4,7 +4,9 @@
   <input type="text" ng-model="$ctrl.name">
   <div>
     <div>
-      <img class="preview" ng-src="{{$ctrl.imageSource}}">
+      <div class="image-container">
+        <img class="preview" ng-src="{{$ctrl.imageSource}}">
+      </div>
       <input type="file" name="image" ng-model="$ctrl.image" custom-on-change="$ctrl.updateImage">
     </div>
   </div>
