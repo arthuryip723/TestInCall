@@ -2,15 +2,21 @@
 <form ng-submit="$ctrl.submit()">
   <label>Name: </label>
   <input type="text" ng-model="$ctrl.name">
-  <div>
-    <div>
+  <div class="image-list row">
+    <!-- <div>
       <div class="image-container">
         <img class="preview" ng-src="{{$ctrl.imageSource}}">
       </div>
       <input type="file" name="image" ng-model="$ctrl.image" custom-on-change="$ctrl.updateImage">
+    </div> -->
+    <div ng-repeat="(key, image) in $ctrl.images" class="col-lg-3">
+      <div class="image-container">
+        <img class="preview" ng-src="{{image.src}}">
+      </div>
+      <input type="file" name="{{ 'image[' + key + '[' }}" data-index="{{ key }}" custom-on-change="$ctrl.updateImage">
     </div>
   </div>
-  <button ng-click="$ctrl.addImage()">Add Image</button>
+  <button ng-click="$ctrl.addImage($event)">Add Image</button>
   <!-- <div>{{$ctrl.imageSource}}</div> -->
 <!--   <textarea>{{$ctrl.imageSource}}</textarea>
  -->

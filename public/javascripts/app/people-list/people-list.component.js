@@ -26,39 +26,37 @@ angular.
     templateUrl: '/javascripts/app/people-list/person-new.template.html',
     controller: ['$location', '$scope', 'People', function PersonNewController($location, $scope, People) {
       var self = this;
-      self.imageSource = 'abc';
+      self.images = [{ src: '' },];
+      // self.imageSource = 'abc';
       self.submit = function () {
         People.save({}, {name: self.name}, function(person) {
           // $window.location.href = '/';
           $location.path('/');
         })
       };
-      self.updateImage = function (event) {
+      self.updateImage = function (event1) {
         // console.log('changing...');
         // alert('changing...');
         // First get the element.
         // console.log(element);
         // console.log(element.files);
-        self.currentFile = event.target.files[0];
+        self.currentFile = event1.target.files[0];
         var reader = new FileReader();
 
-        reader.onload = function(event) {
-          // alert('hello');
-          // console.log(event.target.result);
-          self.imageSource = event.target.result;
-          // self.$apply();
-          // console.log(self.imageSource);
-          // alert('hello');
-          // self.imageSource = 'def';
+        reader.onload = function(event2) {
+          // self.imageSource = event.target.result;
+          self.images[event1.target.dataset.index].src = event2.target.result;
           $scope.$apply();
-          // console.log(self.imageSource);
         };
 
         reader.readAsDataURL(event.target.files[0]);
       };
 
-      self.addImage = function (event) {
-        console.log('adding image...');
+      self.addImage = function ($event) {
+        $event.preventDefault();
+        self.images.push({ src: '' });
+        // console.log('adding image...');
+
       };
       // self.change1 = function (event) {
       //   console.log(self.imageSource);
