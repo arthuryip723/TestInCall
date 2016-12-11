@@ -1,8 +1,9 @@
 <div>Person Detail</div>
 <div>Name: {{ $ctrl.person.name }}</div>
 <div>
-  <div>
-    <img class="avatar-img" src="/images/avatar.jpg"/>
+  <div class="row">
+    <!-- <img class="avatar-img" src="/images/avatar.jpg"/> -->
+    <img ng-repeat="image in $ctrl.person.images" class="avatar-img" src="{{ '/uploads/' + image }}"/>
   </div>
   <div>Rating: {{ $ctrl.averageRating() }}</div>
   <div>Comments:</div>

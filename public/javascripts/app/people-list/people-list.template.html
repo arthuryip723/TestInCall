@@ -11,7 +11,8 @@
   <div class="col-lg-4 person-div" ng-repeat="person in $ctrl.people">
     <a href="#!/person/{{ person._id }}">
       <div class="avatar-div">
-        <img class="avatar-img" src="/images/avatar.jpg"/>
+        <!-- <img class="avatar-img" src="/images/avatar.jpg"/> -->
+        <img class="avatar-img" src="{{ '/uploads/' + person.images[0] }}"/>
       </div>
       <div class="name-div">
         {{ person.name }}

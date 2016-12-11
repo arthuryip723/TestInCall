@@ -8,6 +8,7 @@ var personSchema = new Schema({
     type: Schema.ObjectId,
     ref: 'User'
   },
+  images: [{type: String}],
 });
 
 module.exports = mongoose.model('Person', personSchema);

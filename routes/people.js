@@ -83,38 +83,37 @@ router.post('/', helpers.authenticate);
 
 // router.post('/', upload.array('images', 8), function(req, res, next) {
 // router.post('/', upload.single('image'), function(req, res, next) {
-router.post('/', function(req, res, next) {
+router.post('/', upload, function(req, res, next) {
 // router.post('/', function(req, res, next) {
   // find the current user
   // console.log(req.decoded);
   // console.log(req.decoded.get('_id'));
   // console.log(req.body.name);
   // console.log(req);
-  console.log(req);
-  console.log(req.body);
-  console.log(req.file);
-  console.log(req.files);
-  console.log(req.params);
   // var sampleFile = req.body.image;
   // sampleFile.mv('/Users/ayip/Documents/codes/tmp/sample.jpg', )
+  console.log(req.files);
   // res.send({__v: 0, _id: "584d664671334ab4af88b72b", comments: [], name: "fdsafs", user: "58447b94d1c17470ebd7b3c8"})
-  // var user = User.findById(req.decoded._doc._id, function(err, user) {
-  //   // console.log(user);
-  //   // get the files from the request.
-  //   // for (var i = 0; i < req.files.images.length; i++) {
-  //   //   // req.imageIns[i];
-  //   // }
-  //   var person = new Person({
-  //     name: req.body.name,
-  //     user: user._id,
-  //   });
-  //   person.save(function(err, person) {
-  //     user.people.push(person);
-  //     user.save(function(err, user) {
-  //       res.send(person);
-  //     });
-  //   });
-  // });
+  var user = User.findById(req.decoded._doc._id, function(err, user) {
+    // console.log(user);
+    // get the files from the request.
+    // for (var i = 0; i < req.files.images.length; i++) {
+    //   // req.imageIns[i];
+    // }
+    var person = new Person({
+      name: req.body.name,
+      user: user._id,
+      images: req.files.map(function (file) {
+        return file.filename;
+      }),
+    });
+    person.save(function(err, person) {
+      user.people.push(person);
+      user.save(function(err, user) {
+        res.send(person);
+      });
+    });
+  });
   // fs.writeFile("./public/log.txt", req, function(err) {
   //     if(err) {
   //         return console.log(err);
@@ -122,15 +121,15 @@ router.post('/', function(req, res, next) {
 
   //     console.log("The file was saved!");
   // });
-  upload(req,res,function(err){
-    console.log(req.body);
+  /*upload(req,res,function(err){
+    // console.log(req.body);
     if(err){
          res.json({error_code:1,err_desc:err});
          return;
     }
      res.json({error_code:0,err_desc:null});
      // res.json(req);
-  });
+  });*/
 });
 
 module.exports = router;
