@@ -46,6 +46,7 @@ angular.
     templateUrl: '/javascripts/app/people-list/person-new.template.html',
     controller: ['$location', '$scope', '$http', 'People', 'Upload', function PersonNewController($location, $scope, $http, People, Upload) {
       var self = this;
+      self.files = [];
       self.images = [{ src: '', index: 0 },];
       // self.imagesName = [];
       // self.imageSource = 'abc';
@@ -78,9 +79,11 @@ angular.
         Upload.upload({
           url: 'api2/people/',
           arrayKey: '',
+          // objectKey: '.k',
           // data: {file: self.file, name: self.name},
           // data: {file: self.file, name: 'amy'},
-          data: {files: [self.file, self.file2], name: 'amy'},
+          // data: {files: [self.file, self.file2], name: 'amy'},
+          data: {files: self.files, name: 'amy'},
           // fields: {name: self.name},
         }).then(function (resp) {
           console.log('success');
