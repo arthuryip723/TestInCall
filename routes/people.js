@@ -5,6 +5,8 @@ var Comment = require('../models/comment.js');
 var User = require('../models/user.js');
 var helpers = require('./helpers.js');
 var multer = require('multer');
+// var fs = require('fs');
+
 // var storage = multer.diskStorage({
 //   destination: function(req, file, cb){
 //     console.log('destination called...');
@@ -20,7 +22,8 @@ var multer = require('multer');
 var storage = multer.diskStorage({ //multers disk storage settings
     destination: function (req, file, cb) {
         // cb(null, './uploads/');
-      cb(null, '/Users/ayip/Documents/codes/tmp/');
+        cb(null, './public/images');
+      // cb(null, '/Users/ayip/Documents/codes/tmp/');
     },
     filename: function (req, file, cb) {
         var datetimestamp = Date.now();
@@ -28,9 +31,12 @@ var storage = multer.diskStorage({ //multers disk storage settings
     }
 });
 
+// var upload = multer({ //multer settings
+//                 storage: storage
+//             }).single('file');
 var upload = multer({ //multer settings
                 storage: storage
-            }).single('file');
+            }).array('files', 8);
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
@@ -88,6 +94,7 @@ router.post('/', function(req, res, next) {
   console.log(req.body);
   console.log(req.file);
   console.log(req.files);
+  console.log(req.params);
   // var sampleFile = req.body.image;
   // sampleFile.mv('/Users/ayip/Documents/codes/tmp/sample.jpg', )
   // res.send({__v: 0, _id: "584d664671334ab4af88b72b", comments: [], name: "fdsafs", user: "58447b94d1c17470ebd7b3c8"})
@@ -108,12 +115,21 @@ router.post('/', function(req, res, next) {
   //     });
   //   });
   // });
+  // fs.writeFile("./public/log.txt", req, function(err) {
+  //     if(err) {
+  //         return console.log(err);
+  //     }
+
+  //     console.log("The file was saved!");
+  // });
   upload(req,res,function(err){
+    console.log(req.body);
     if(err){
          res.json({error_code:1,err_desc:err});
          return;
     }
      res.json({error_code:0,err_desc:null});
+     // res.json(req);
   });
 });
 

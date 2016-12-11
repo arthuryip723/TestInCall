@@ -74,10 +74,14 @@ angular.
         //   // $location.path('/');
         //   console.log('success');
         // });
-        debugger
+        // debugger
         Upload.upload({
           url: 'api2/people/',
-          data: {file: self.file, name: self.name},
+          arrayKey: '',
+          // data: {file: self.file, name: self.name},
+          // data: {file: self.file, name: 'amy'},
+          data: {files: [self.file, self.file2], name: 'amy'},
+          // fields: {name: self.name},
         }).then(function (resp) {
           console.log('success');
         });

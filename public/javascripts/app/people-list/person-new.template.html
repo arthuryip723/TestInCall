@@ -24,6 +24,15 @@
                 accept="image/*" 
                 ngf-max-size="20MB" 
                 />
+      <input 
+                type="file" 
+                ngf-select 
+                ng-model="$ctrl.file2" 
+                name="file2" 
+                ngf-pattern="'image/*'"
+                accept="image/*" 
+                ngf-max-size="20MB" 
+                />
       <!-- <input type="text" ng-model="$ctrl.imageNames[index]"> -->
       <button ng-click="$ctrl.removeImage($event)" data-index="{{ index }} ">Delete</button>
     </div>
