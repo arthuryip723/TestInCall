@@ -9,7 +9,7 @@ angular.
         element.bind('change', onChangeFunc);
       }
     };
-  }).
+  })/*.
   directive("fileread", [function () {
     return {
         scope: {
@@ -27,7 +27,7 @@ angular.
             });
         }
     }
-  }]);
+  }])*/;
 
 angular.
   module('peopleList').
