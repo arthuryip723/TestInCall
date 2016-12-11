@@ -22,7 +22,7 @@ var multer = require('multer');
 var storage = multer.diskStorage({ //multers disk storage settings
     destination: function (req, file, cb) {
         // cb(null, './uploads/');
-        cb(null, './public/images');
+        cb(null, './public/uploads');
       // cb(null, '/Users/ayip/Documents/codes/tmp/');
     },
     filename: function (req, file, cb) {
