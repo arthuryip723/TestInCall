@@ -12,6 +12,7 @@ var Strategy = require('passport-local').Strategy;
 var User = require('./models/user');
 var db = require('./db');
 
+mongoose.set('debug', true);
 mongoose.connect('mongodb://localhost/incall');
 
 passport.use(new Strategy(

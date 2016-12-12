@@ -47,6 +47,7 @@ angular.
     controller: ['$location', '$scope', '$http', 'People', 'Upload', function PersonNewController($location, $scope, $http, People, Upload) {
       var self = this;
       self.files = [];
+      // self.avatarPreview = {};
       self.images = [{ src: '', index: 0 },];
       // self.imagesName = [];
       // self.imageSource = 'abc';
@@ -83,7 +84,7 @@ angular.
           // data: {file: self.file, name: self.name},
           // data: {file: self.file, name: 'amy'},
           // data: {files: [self.file, self.file2], name: 'amy'},
-          data: {files: self.files, name: 'amy'},
+          data: {files: self.files, avatar: self.avatar, name: 'amy'},
           // fields: {name: self.name},
         }).then(function (resp) {
           console.log('success');
@@ -97,6 +98,21 @@ angular.
         reader.onload = function(event2) {
           // self.imageSource = event.target.result;
           self.images[event1.target.dataset.index].src = event2.target.result;
+          $scope.$apply();
+        };
+
+        reader.readAsDataURL(event.target.files[0]);
+      };
+
+      self.updateAvatar = function (event1) {
+        // Take care of the situation where you cancel choosing the file.
+        self.currentFile = event1.target.files[0];
+        var reader = new FileReader();
+
+        reader.onload = function(event2) {
+          // self.imageSource = event.target.result;
+          // self.avatar.src = event2.target.result;
+          self.avatarSrc = event2.target.result;
           $scope.$apply();
         };
 

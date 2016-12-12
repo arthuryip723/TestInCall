@@ -9,6 +9,22 @@
       </div>
       <input type="file" name="image" ng-model="$ctrl.image" custom-on-change="$ctrl.updateImage">
     </div> -->
+    <div>
+      <div>
+        <img class="preview" ng-src="{{ $ctrl.avatarSrc }}">
+      </div>
+      <input
+                type="file" 
+                ngf-select 
+                ng-model="$ctrl.avatar" 
+                name="file" 
+                ngf-pattern="'image/*'"
+                accept="image/*" 
+                ngf-max-size="20MB"
+                custom-on-change="$ctrl.updateAvatar" 
+                data-index="{{ index }}"
+                >
+    </div>
     <div ng-repeat="(index, image) in $ctrl.images" class="col-lg-3">
       <div class="image-container">
         <img class="preview" ng-src="{{image.src}}">

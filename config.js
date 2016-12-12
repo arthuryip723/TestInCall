@@ -10,7 +10,7 @@ var config = {
         }
     },
     'secret': 'ilovescotchyscotch',
-    'database': 'mongodb://localhost:27017/incall',
+    // 'database': 'mongodb://localhost:27017/incall',
 };
 
 module.exports = config;

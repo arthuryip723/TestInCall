@@ -34,9 +34,12 @@ var storage = multer.diskStorage({ //multers disk storage settings
 // var upload = multer({ //multer settings
 //                 storage: storage
 //             }).single('file');
+// var upload = multer({ //multer settings
+//                 storage: storage
+//             }).array('files', 8);
 var upload = multer({ //multer settings
                 storage: storage
-            }).array('files', 8);
+            }).fields([{name: 'avatar', maxCount: 1}, {name: 'files', maxCount: 8}]);
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
@@ -103,9 +106,10 @@ router.post('/', upload, function(req, res, next) {
     var person = new Person({
       name: req.body.name,
       user: user._id,
-      images: req.files.map(function (file) {
+      images: req.files.files.map(function (file) {
         return file.filename;
       }),
+      avatar: req.files.avatar[0].filename,
     });
     person.save(function(err, person) {
       user.people.push(person);

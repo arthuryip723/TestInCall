@@ -4,6 +4,7 @@ var config = require("./config"),
 var connectionString = process.env.DEBUG === "true" ?
     config.debug.database.connectionString :
     config.database.connectionString;
+console.log(config);
 
 mongoose.connect(connectionString);
 
