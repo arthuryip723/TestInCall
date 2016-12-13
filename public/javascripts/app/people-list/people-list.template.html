@@ -12,7 +12,7 @@
     <a href="#!/person/{{ person._id }}">
       <div class="avatar-div">
         <!-- <img class="avatar-img" src="/images/avatar.jpg"/> -->
-        <img class="avatar-img" src="{{ '/uploads/' + person.avatar }}"/>
+        <img class="avatar-img" ng-src="{{ '/uploads/' + person.avatar }}"/>
       </div>
       <div class="name-div">
         {{ person.name }}

@@ -44,7 +44,18 @@ var upload = multer({ //multer settings
 /* GET users listing. */
 router.get('/', function(req, res, next) {
   // res.send('respond with a resource');
-  Person.find(function(err, people) {
+  // Person.find(function(err, people) {
+  //   res.send(people);
+  // });
+  Person.aggregate([{
+    '$project':{
+        'name': 1,
+        'avatar': 1,
+        'avgRating': {
+            '$avg': '$reviews.rating'
+            }
+        },
+    }, {'$sort': {'avgRating': -1}}]).exec(function(err, people) {
     res.send(people);
   });
 });
