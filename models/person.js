@@ -8,6 +8,8 @@ var Review = new Schema({
 
 var personSchema = new Schema({
   name: { type: String, default: 'Amy' },
+  description: { type: String, default: "I'm gorgeous." },
+  phone: { type: String, default: '123-456-7890' },
   comments: [{ type: Schema.Types.ObjectId, ref: 'Comment' }],
   reviews: [Review],
   user: {

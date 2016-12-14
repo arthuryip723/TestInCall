@@ -1,16 +1,8 @@
 <h1>Create New Person</h1>
 <form ng-submit="$ctrl.submit()">
-  <label>Name: </label>
-  <input type="text" ng-model="$ctrl.name">
-  <div class="image-list row">
-    <!-- <div>
+  <div class="row">
+    <div class="col-lg-4">
       <div class="image-container">
-        <img class="preview" ng-src="{{$ctrl.imageSource}}">
-      </div>
-      <input type="file" name="image" ng-model="$ctrl.image" custom-on-change="$ctrl.updateImage">
-    </div> -->
-    <div>
-      <div>
         <img class="preview" ng-src="{{ $ctrl.avatarSrc }}">
       </div>
       <input
@@ -25,6 +17,34 @@
                 data-index="{{ index }}"
                 >
     </div>
+    <div class="col-lg-8">
+      <div class="form-group">
+        <label for="name">
+          Name:
+        </label>
+        <input type="text" name="name" ng-model="$ctrl.name" class="form-control">
+      </div>
+      <div class="form-group">
+        <label for="description">
+          Description:
+        </label>
+        <textarea name="description" ng-model="$ctrl.description" class="form-control description-textarea"></textarea>
+      </div>
+      <div class="form-group">
+        <label for="phone">
+          Telephone:
+        </label>
+        <input name="phone" type="tel" class="form-control">
+      </div>
+    </div>
+  </div>
+  <div class="image-list row">
+    <!-- <div>
+      <div class="image-container">
+        <img class="preview" ng-src="{{$ctrl.imageSource}}">
+      </div>
+      <input type="file" name="image" ng-model="$ctrl.image" custom-on-change="$ctrl.updateImage">
+    </div> -->
     <div ng-repeat="(index, image) in $ctrl.images" class="col-lg-3">
       <div class="image-container">
         <img class="preview" ng-src="{{image.src}}">
