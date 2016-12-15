@@ -51,6 +51,7 @@ ul {
   /*line-height: 320px;*/
   display: table-cell;
   vertical-align: middle;
+  margin: 0 auto;
 }
 
 textarea.description-textarea {

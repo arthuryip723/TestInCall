@@ -8,11 +8,13 @@
   <li ng-repeat="person in $ctrl.people"><a href="#!/person/{{ person._id }}">{{ person.name }}</a></li>
 </ul> -->
 <div class="row">
-  <div class="col-lg-4 person-div" ng-repeat="person in $ctrl.people">
+  <div class="col-lg-3 person-div" ng-repeat="person in $ctrl.people">
     <a href="#!/person/{{ person._id }}">
-      <div class="avatar-div">
+      <!-- <div class="avatar-div"> -->
+      <div class="image-container">
         <!-- <img class="avatar-img" src="/images/avatar.jpg"/> -->
-        <img class="avatar-img" ng-src="{{ '/uploads/' + person.avatar }}"/>
+        <!-- <img class="avatar-img" ng-src="{{ '/uploads/' + person.avatar }}"/> -->
+        <img class="preview" ng-src="{{ '/uploads/' + person.avatar }}"/>
       </div>
       <div class="name-div">
         {{ person.name }}
