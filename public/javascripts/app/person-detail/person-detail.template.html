@@ -3,7 +3,7 @@
 <div>
   <div class="row">
     <!-- <img class="avatar-img" src="/images/avatar.jpg"/> -->
-    <img ng-repeat="image in $ctrl.person.images" class="avatar-img" ng-src="{{ '/uploads/' + image }}"/>
+    <img ng-repeat="image in $ctrl.person.gallery" class="avatar-img" ng-src="{{ '/uploads/' + image }}"/>
   </div>
   <div>Rating: {{ $ctrl.averageRating() }}</div>
   <div>Comments:</div>

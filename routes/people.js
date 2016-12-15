@@ -39,7 +39,7 @@ var storage = multer.diskStorage({ //multers disk storage settings
 //             }).array('files', 8);
 var upload = multer({ //multer settings
                 storage: storage
-            }).fields([{name: 'avatar', maxCount: 1}, {name: 'files', maxCount: 8}]);
+            }).fields([{name: 'avatar', maxCount: 1}, {name: 'gallery', maxCount: 8}]);
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
@@ -106,7 +106,7 @@ router.post('/', upload, function(req, res, next) {
   // console.log(req);
   // var sampleFile = req.body.image;
   // sampleFile.mv('/Users/ayip/Documents/codes/tmp/sample.jpg', )
-  console.log(req.files);
+  // console.log(req.files);
   // res.send({__v: 0, _id: "584d664671334ab4af88b72b", comments: [], name: "fdsafs", user: "58447b94d1c17470ebd7b3c8"})
   var user = User.findById(req.decoded._doc._id, function(err, user) {
     // console.log(user);
@@ -116,8 +116,10 @@ router.post('/', upload, function(req, res, next) {
     // }
     var person = new Person({
       name: req.body.name,
+      description: req.body.description,
+      phone: req.body.phone,
       user: user._id,
-      images: req.files.files.map(function (file) {
+      gallery: req.files.gallery.map(function (file) {
         return file.filename;
       }),
       avatar: req.files.avatar[0].filename,

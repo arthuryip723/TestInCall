@@ -46,9 +46,9 @@ angular.
     templateUrl: '/javascripts/app/people-list/person-new.template.html',
     controller: ['$location', '$scope', '$http', 'People', 'Upload', function PersonNewController($location, $scope, $http, People, Upload) {
       var self = this;
-      self.files = [];
+      // self.files = [];
       // self.avatarPreview = {};
-      self.images = [{ src: '', index: 0 },];
+      self.gallery = [{ src: ''},];
       // self.imagesName = [];
       // self.imageSource = 'abc';
       self.submit = function () {
@@ -77,6 +77,9 @@ angular.
         //   console.log('success');
         // });
         // debugger
+        let galleryData = self.gallery.map(function(el) {
+          return el.input;
+        });
         Upload.upload({
           url: 'api2/people/',
           arrayKey: '',
@@ -84,7 +87,13 @@ angular.
           // data: {file: self.file, name: self.name},
           // data: {file: self.file, name: 'amy'},
           // data: {files: [self.file, self.file2], name: 'amy'},
-          data: {files: self.files, avatar: self.avatar, name: 'amy'},
+          data: {
+            gallery: galleryData,
+            avatar: self.avatar,
+            name: self.name,
+            description: self.description,
+            phone: self.phone,
+          },
           // fields: {name: self.name},
         }).then(function (resp) {
           console.log('success');
@@ -97,7 +106,7 @@ angular.
 
         reader.onload = function(event2) {
           // self.imageSource = event.target.result;
-          self.images[event1.target.dataset.index].src = event2.target.result;
+          self.gallery[event1.target.dataset.index].src = event2.target.result;
           $scope.$apply();
         };
 
@@ -121,7 +130,7 @@ angular.
 
       self.addImage = function ($event) {
         $event.preventDefault();
-        self.images.push({ src: '' });
+        self.gallery.push({ src: '' });
       };
 
       self.removeImage = function ($event) {
@@ -129,7 +138,7 @@ angular.
         // need to find the key here
         // debugger;
         // figure out how to delete an element in an array
-        self.images.splice($event.target.dataset.index, 1);
+        self.gallery.splice($event.target.dataset.index, 1);
       };
       // self.change1 = function (event) {
       //   console.log(self.imageSource);

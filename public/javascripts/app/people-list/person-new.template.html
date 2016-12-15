@@ -34,7 +34,7 @@
         <label for="phone">
           Telephone:
         </label>
-        <input name="phone" type="tel" class="form-control">
+        <input name="phone" type="tel" ng-model="$ctrl.phone" class="form-control">
       </div>
     </div>
   </div>
@@ -45,7 +45,7 @@
       </div>
       <input type="file" name="image" ng-model="$ctrl.image" custom-on-change="$ctrl.updateImage">
     </div> -->
-    <div ng-repeat="(index, image) in $ctrl.images" class="col-lg-3">
+    <div ng-repeat="(index, image) in $ctrl.gallery" class="col-lg-3">
       <div class="image-container">
         <img class="preview" ng-src="{{image.src}}">
       </div>
@@ -54,7 +54,7 @@
       <input 
                 type="file" 
                 ngf-select 
-                ng-model="$ctrl.files[index]" 
+                ng-model="$ctrl.gallery[index].input" 
                 name="file" 
                 ngf-pattern="'image/*'"
                 accept="image/*" 

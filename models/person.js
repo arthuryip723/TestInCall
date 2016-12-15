@@ -16,7 +16,7 @@ var personSchema = new Schema({
     type: Schema.ObjectId,
     ref: 'User'
   },
-  images: [{ type: String }],
+  gallery: [{ type: String }],
   avatar: { type: String, default: 'default.jpg' },
 });
 
