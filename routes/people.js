@@ -114,14 +114,15 @@ router.post('/', upload, function(req, res, next) {
     // for (var i = 0; i < req.files.images.length; i++) {
     //   // req.imageIns[i];
     // }
+    let gallery = req.files.gallery ? req.files.gallery.map(function (file) {
+        return file.filename;
+      }) : []
     var person = new Person({
       name: req.body.name,
       description: req.body.description,
       phone: req.body.phone,
       user: user._id,
-      gallery: req.files.gallery.map(function (file) {
-        return file.filename;
-      }),
+      gallery,
       avatar: req.files.avatar[0].filename,
     });
     person.save(function(err, person) {

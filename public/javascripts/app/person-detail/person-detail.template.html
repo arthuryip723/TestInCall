@@ -1,10 +1,19 @@
 <div>Person Detail</div>
 <div>Name: {{ $ctrl.person.name }}</div>
 <div>
-  <div class="row">
-    <!-- <img class="avatar-img" src="/images/avatar.jpg"/> -->
-    <img ng-repeat="image in $ctrl.person.gallery" class="avatar-img" ng-src="{{ '/uploads/' + image }}"/>
+  <div class="avatar-div">
+    <img ng-src="{{ '/uploads/' + $ctrl.person.avatar }}" class="preview">
   </div>
+</div>
+<div class="row">
+  <!-- <img class="avatar-img" src="/images/avatar.jpg"/> -->
+  <div ng-repeat="image in $ctrl.person.gallery" class="col-lg-3">
+    <div class="avatar-div">
+      <img ng-src="{{ '/uploads/' + image }}" class="preview"/>
+    </div>
+  </div>
+</div>
+<div>
   <div>Rating: {{ $ctrl.averageRating() }}</div>
   <div>Comments:</div>
   <ul class="comments-ul">
