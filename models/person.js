@@ -4,6 +4,7 @@ var mongoose = require('mongoose')
 var Review = new Schema({
   content: String,
   rating: Number,
+  commentSet: { type: Schema.Types.ObjectId, ref: 'CommentSet', default: null },
 });
 
 var personSchema = new Schema({
@@ -11,6 +12,7 @@ var personSchema = new Schema({
   description: { type: String, default: "I'm gorgeous." },
   phone: { type: String, default: '123-456-7890' },
   comments: [{ type: Schema.Types.ObjectId, ref: 'Comment' }],
+  commentSet: {type: Schema.Types.ObjectId, ref: 'CommentSet'},
   reviews: [Review],
   user: {
     type: Schema.ObjectId,
