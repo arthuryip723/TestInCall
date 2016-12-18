@@ -40,6 +40,10 @@ angular.
       //   self.people = response.data;
       // });
       self.people = People.query();
+
+      self.changeOrderBy = function () {
+        console.log(self.orderBy);
+      };
     }],
   }).
   component('personNew', {
@@ -141,6 +145,7 @@ angular.
         // figure out how to delete an element in an array
         self.gallery.splice($event.target.dataset.index, 1);
       };
+
       // self.change1 = function (event) {
       //   console.log(self.imageSource);
       //   alert('hello');

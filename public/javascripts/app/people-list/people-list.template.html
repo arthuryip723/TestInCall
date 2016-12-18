@@ -7,6 +7,13 @@
 <!-- <ul>
   <li ng-repeat="person in $ctrl.people"><a href="#!/person/{{ person._id }}">{{ person.name }}</a></li>
 </ul> -->
+<div>
+  <label for="order_by">Order By:</label>
+  <select name="order_by" ng-model="$ctrl.orderBy" ng-change="$ctrl.changeOrderBy()">
+    <option value="rating">Rating</option>
+    <option value="newest">Newest</option>
+  </select>
+</div>
 <div class="row">
   <div class="col-lg-3 person-div" ng-repeat="person in $ctrl.people">
     <a href="#!/person/{{ person._id }}" class="clearfix">
