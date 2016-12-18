@@ -1,10 +1,17 @@
 var mongoose = require('mongoose')
   ,Schema = mongoose.Schema;
 
-var Review = new Schema({
+var commentSchema = new Schema({
+  content: String,
+  author: { type: Schema.Types.ObjectId, ref: 'User' },
+});
+
+var reviewSchema = new Schema({
   content: String,
   rating: Number,
-  commentSet: { type: Schema.Types.ObjectId, ref: 'CommentSet', default: null },
+  // commentSet: { type: Schema.Types.ObjectId, ref: 'CommentSet', default: null },
+  comments: [commentSchema],
+  author: { type: Schema.Types.ObjectId, ref: 'User' },
 });
 
 var personSchema = new Schema({
@@ -13,9 +20,9 @@ var personSchema = new Schema({
   phone: { type: String, default: '123-456-7890' },
   comments: [{ type: Schema.Types.ObjectId, ref: 'Comment' }],
   commentSet: {type: Schema.Types.ObjectId, ref: 'CommentSet'},
-  reviews: [Review],
+  reviews: [reviewSchema],
   user: {
-    type: Schema.ObjectId,
+    type: Schema.Types.ObjectId,
     ref: 'User'
   },
   gallery: [{ type: String }],

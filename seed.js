@@ -32,26 +32,55 @@
 //         ]
 //     }
 // ];
-
 require('./database');
 
 var Person = require('./models/person');
 var Comment = require('./models/comment');
+var User = require('./models/user');
 
 Person.remove(function(err, pepole) {});
-Comment.remove(function(err, commenrts) {});
+Comment.remove(function(err, comments) {});
+User.remove(function(err, users) {});
+
+var buyer1 = new User({
+  name: 'buyer1',
+  password: 'buyer1',
+  role: 'buyer',
+});
+var buyer2 = new User({
+  name: 'buyer2',
+  password: 'buyer2',
+  role: 'buyer',
+});
+
+var seller1 = new User({
+  name: 'seller1',
+  password: 'seller1',
+  role: 'seller',
+});
+
+buyer1.save();
+buyer2.save();
+seller1.save();
+
 var alex = new Person({
     name: 'Alex',
-    reviews: [{content: 'Alex is great', rating: 3}],
+    reviews: [{content: 'Alex is great', rating: 3, author: buyer1._id, comments: [
+      {content: "You're right.", author: buyer2._id},
+      {content: "Thank you.", author: buyer1._id},
+    ],}],
 });
 
 var joe = new Person({
     name: 'Joe',
-    reviews: [{content: 'Joe is so-so.', rating: 5}],
+    reviews: [{content: 'Joe is so-so.', rating: 5, author: buyer1._id}],
 });
 
 alex.save();
 joe.save();
+
+alex.reviews.push({content: 'Alex is bad.', rating: 1});
+alex.save();
 var comment1 = new Comment({
     content: "Alex is great.",
     person: alex._id,

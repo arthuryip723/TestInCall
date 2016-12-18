@@ -2,11 +2,10 @@
 <div>Name: {{ $ctrl.person.name }}</div>
 <div>
   <div class="avatar-div">
-    <img ng-src="{{ '/uploads/' + $ctrl.person.avatar }}" class="preview">
+    <img ng-src="{{ '/uploads/' + $ctrl.person.avatar }}" ng-if="$ctrl.person.avatar" class="preview">
   </div>
 </div>
 <div class="row">
-  <!-- <img class="avatar-img" src="/images/avatar.jpg"/> -->
   <div ng-repeat="image in $ctrl.person.gallery" class="col-lg-3">
     <div class="avatar-div">
       <img ng-src="{{ '/uploads/' + image }}" class="preview"/>
@@ -27,7 +26,7 @@
       </div>
     </li>
   </ul>
-  <form ng-submit="$ctrl.submit()">
+<!--   <form ng-submit="$ctrl.submit()">
     <p>Add a comment</p>
     <textarea ng-model="$ctrl.content"></textarea><br>
     <label>Rating:</label>
@@ -39,5 +38,42 @@
       <option value="5">5</option>
     </select>
     <button>Comment</button>
+  </form> -->
+</div>
+<div>
+  <div>Reviews:</div>
+  <ul>
+    <li ng-repeat="review in $ctrl.person.reviews">
+      <div>
+        {{ review.rating }}
+      </div>
+      <div>
+        {{ review.content }}
+      </div>
+      <div>
+        <button ng-click="$ctrl.loadComments(review)">Load</button>
+        <!-- <button ng-click="review.commentsDisplayed=true;">Load</button> -->
+      </div>
+      <div ng-if="review.commentsDisplayed">
+        <ul>
+          <li ng-repeat="comment in review.comments">
+            {{ comment.content }}
+          </li>
+        </ul>
+      </div>
+    </li>
+  </ul>
+  <form ng-submit="$ctrl.submitReview()">
+    <label for="rating">Rating:</label>
+    <select name="rating" ng-model="$ctrl.rating">
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
+    </select>
+    <p>Add a review</p>
+    <textarea ng-model="$ctrl.content"></textarea>
+    <button>Review</button>
   </form>
 </div>

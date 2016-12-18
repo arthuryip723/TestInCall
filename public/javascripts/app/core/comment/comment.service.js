@@ -12,4 +12,13 @@ angular.
         }
       });
     }
-  ]);
+  ]).
+  factory('Review', ['$resource',
+    function($resource) {
+      return $resource('api2/people/:id/reviews', {}, {
+        query: {
+          method: 'GET',
+          isArray: true,
+        }
+      })
+  }]);

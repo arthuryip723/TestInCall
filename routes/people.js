@@ -78,6 +78,32 @@ router.post('/:id/comments', function(req, res, next) {
   }); 
 });
 
+router.post('/:id/reviews', function(req, res, next) {
+  // console.log(req.body);
+  Person.findById(req.params.id, function(err, person) {
+    // res.send({result: 'success'});
+    // var comment = new Comment({
+    //   content: req.body.content,
+    //   person: person._id,
+    //   rating: req.body.rating,
+    // });
+    // comment.save(function(err, comment){
+    //   person.comments.push(comment);
+    //   person.save(function(err, person){
+    //     res.send(comment);
+    //   });
+    // });
+    person.reviews.push({ content: req.body.content, rating: req.body.rating });
+    // Should I update or save here?
+    let review = person.reviews[person.reviews.length - 1];
+    person.save(function (err) {
+      // res.send({result: 'success'});
+      // console.log(arguments);
+      res.send(review);
+    });
+  }); 
+});
+
 router.get('/:id', helpers.authenticate);
 
 router.get('/:id', function(req, res, next) {

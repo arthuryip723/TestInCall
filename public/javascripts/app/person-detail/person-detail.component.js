@@ -4,12 +4,14 @@ angular.
   module('personDetail').
   component('personDetail', {
     templateUrl: '/javascripts/app/person-detail/person-detail.template.html',
-    controller: ['$routeParams', 'People', 'Comment', function PersonDetailController($routeParams, People, Comment) {
+    controller: ['$routeParams', 'People', 'Comment', 'Review', function PersonDetailController($routeParams, People, Comment, Review) {
       var self = this;
       // this.personId = $routeParams.personId;
 
       self.person = People.get({id: $routeParams.personId}, function(person) {
-      
+        // don't show the comment when first load
+        // set a flag for each review to be false at first
+        // load comment will toggle that flag
       });
 
       self.rating = "3";
@@ -24,15 +26,35 @@ angular.
       };
 
       self.submit = function() {
-        console.log("submitting...");
-        console.log(self.content);
+        // console.log("submitting...");
+        // console.log(self.content);
         // submit the comment to server
         // first build a resource for accessing comments
-        console.log(self.rating);
+        // console.log(self.rating);
         Comment.save({id: $routeParams.personId}, {content: self.content, rating: self.rating}, function(comment) {
           self.person.comments.push(comment);
         });
         self.content = '';
+      };
+
+      self.submitReview = function () {
+        // console.log('submittin review...');
+        // return;
+        Review.save({id: $routeParams.personId}, { content: self.content, rating: self.rating }, function(review) {
+          self.person.reviews.push(review);
+        });
+        self.content = '';
+      };
+
+      self.loadComments = function (review) {
+        // console.log('loading', id);
+        // find commentSet
+        // review.commentSet = {
+        //   id: 1,
+        //   comments: [{content: 'comment 1'}, {content: 'comment 2'}],
+        // };
+        // review.commentss = [{content: 'comment 1'}, {content: 'comment 2'}];
+        review.commentsDisplayed = true;
       };
     }],
   });
