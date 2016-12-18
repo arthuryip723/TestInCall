@@ -9,6 +9,7 @@ angular.
       // this.personId = $routeParams.personId;
 
       self.person = People.get({id: $routeParams.personId}, function(person) {
+        // console.log(arguments);
         // don't show the comment when first load
         // set a flag for each review to be false at first
         // load comment will toggle that flag
@@ -54,7 +55,14 @@ angular.
         //   comments: [{content: 'comment 1'}, {content: 'comment 2'}],
         // };
         // review.commentss = [{content: 'comment 1'}, {content: 'comment 2'}];
-        review.commentsDisplayed = true;
+        Comment.query({id: $routeParams.personId, reviewId: review._id}, function(comments) {
+          // console.log(arguments);
+          // console.log(comments);
+          review.comments = comments;
+          review.commentsDisplayed = true;
+        }, function() {
+          console.log(arguments);
+        });
       };
     }],
   });

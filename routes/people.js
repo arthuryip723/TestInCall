@@ -104,6 +104,13 @@ router.post('/:id/reviews', function(req, res, next) {
   }); 
 });
 
+router.get('/:id/reviews/:reviewId/comments', function(req, res, next) {
+  // res.send({result: 'success'});
+  Person.findOne({_id: req.params.id}, {'reviews': {$elemMatch: {_id: req.params.reviewId}}}).exec(function(err, person) {
+    res.send(person.reviews[0].comments);
+  });
+});
+
 router.get('/:id', helpers.authenticate);
 
 router.get('/:id', function(req, res, next) {
@@ -114,7 +121,7 @@ router.get('/:id', function(req, res, next) {
   //     res.send(person);
   //   });
   // })
-  Person.findById(req.params.id).populate('comments').exec(function(err, person) {
+  Person.findById(req.params.id, {'reviews.comments': 0}).populate('comments').exec(function(err, person) {
     res.send(person);
   });
 });
