@@ -10,11 +10,11 @@
 <div class="row">
   <div class="col-lg-3 person-div" ng-repeat="person in $ctrl.people">
     <a href="#!/person/{{ person._id }}" class="clearfix">
-      <div class="avatar-div">
+      <div class="div-image">
       <!-- <div class="image-container"> -->
         <!-- <img class="avatar-img" src="/images/avatar.jpg"/> -->
         <!-- <img class="avatar-img" ng-src="{{ '/uploads/' + person.avatar }}"/> -->
-        <img class="preview" ng-src="{{ '/uploads/' + (person.avatar || 'default.jpg') }}"/>
+        <img class="img-image" ng-src="{{ '/uploads/' + (person.avatar || 'default.jpg') }}"/>
       </div>
       <div class="name-div">
         {{ person.name }}

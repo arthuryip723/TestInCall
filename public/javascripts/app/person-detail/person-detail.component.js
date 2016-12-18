@@ -70,6 +70,7 @@ angular.
         // console.log(review.commentContent);
         Comment.save({id: $routeParams.personId, reviewId: review._id}, {content: review.commentContent}, function(comment) {
           review.comments.push(comment);
+          review.commentContent = '';
         }, function() {
           console.log(arguments);
         });

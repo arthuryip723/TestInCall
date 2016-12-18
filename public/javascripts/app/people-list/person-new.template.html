@@ -2,8 +2,8 @@
 <form ng-submit="$ctrl.submit()">
   <div class="row">
     <div class="col-lg-4">
-      <div class="image-container">
-        <img class="preview" ng-src="{{ $ctrl.avatarSrc }}">
+      <div class="div-image">
+        <img class="img-image" ng-src="{{ $ctrl.avatarSrc }}">
       </div>
       <input
                 type="file" 
@@ -46,8 +46,8 @@
       <input type="file" name="image" ng-model="$ctrl.image" custom-on-change="$ctrl.updateImage">
     </div> -->
     <div ng-repeat="(index, image) in $ctrl.gallery" class="col-lg-3">
-      <div class="image-container">
-        <img class="preview" ng-src="{{image.src}}">
+      <div class="div-image">
+        <img class="img-image" ng-src="{{image.src}}">
       </div>
       <!-- <input type="file" name="{{ 'image[' + index + ']' }}" data-index="{{ index }}" custom-on-change="$ctrl.updateImage" fileread="$ctrl.imageIns[index]"> -->
       <!-- <input type="file" name="file" ng-model="$ctrl.file"> -->

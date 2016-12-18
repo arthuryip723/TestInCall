@@ -96,7 +96,8 @@ angular.
           },
           // fields: {name: self.name},
         }).then(function (resp) {
-          console.log('success');
+          $location.path('/');
+          // console.log('success');
         });
       };
       self.updateImage = function (event1) {

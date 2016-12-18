@@ -1,14 +1,14 @@
 <div>Person Detail</div>
 <div>Name: {{ $ctrl.person.name }}</div>
 <div>
-  <div class="avatar-div">
-    <img ng-src="{{ '/uploads/' + ($ctrl.person.avatar || 'default.jpg') }}" ng-if="$ctrl.person.avatar" class="preview">
+  <div class="div-image">
+    <img ng-src="{{ '/uploads/' + ($ctrl.person.avatar || 'default.jpg') }}" ng-if="$ctrl.person.avatar" class="img-image">
   </div>
 </div>
 <div class="row">
   <div ng-repeat="image in $ctrl.person.gallery" class="col-lg-3">
-    <div class="avatar-div">
-      <img ng-src="{{ '/uploads/' + image }}" class="preview"/>
+    <div class="div-image">
+      <img ng-src="{{ '/uploads/' + image }}" class="img-image"/>
     </div>
   </div>
 </div>
