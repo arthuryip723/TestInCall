@@ -2,7 +2,7 @@
 <div>Name: {{ $ctrl.person.name }}</div>
 <div>
   <div class="avatar-div">
-    <img ng-src="{{ '/uploads/' + $ctrl.person.avatar }}" ng-if="$ctrl.person.avatar" class="preview">
+    <img ng-src="{{ '/uploads/' + ($ctrl.person.avatar || 'default.jpg') }}" ng-if="$ctrl.person.avatar" class="preview">
   </div>
 </div>
 <div class="row">
@@ -60,6 +60,9 @@
             {{ comment.content }}
           </li>
         </ul>
+        <form ng-submit="$ctrl.submitComment(review)">
+          <textarea ng-model="review.commentContent"></textarea><button>Comment</button>
+        </form>
       </div>
     </li>
   </ul>

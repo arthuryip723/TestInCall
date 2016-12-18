@@ -6,6 +6,7 @@ var connectionString = process.env.DEBUG === "true" ?
     config.database.connectionString;
 console.log(config);
 
+mongoose.set('debug', true);
 mongoose.connect(connectionString);
 
 mongoose.connection.on("connected", function() {

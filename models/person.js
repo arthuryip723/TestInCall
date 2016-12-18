@@ -15,9 +15,9 @@ var reviewSchema = new Schema({
 });
 
 var personSchema = new Schema({
-  name: { type: String, default: 'Amy' },
-  description: { type: String, default: "I'm gorgeous." },
-  phone: { type: String, default: '123-456-7890' },
+  name: { type: String},
+  description: { type: String},
+  phone: { type: String},
   comments: [{ type: Schema.Types.ObjectId, ref: 'Comment' }],
   commentSet: {type: Schema.Types.ObjectId, ref: 'CommentSet'},
   reviews: [reviewSchema],
@@ -26,7 +26,7 @@ var personSchema = new Schema({
     ref: 'User'
   },
   gallery: [{ type: String }],
-  avatar: { type: String, default: 'default.jpg' },
+  avatar: { type: String},
 });
 
 module.exports = mongoose.model('Person', personSchema);

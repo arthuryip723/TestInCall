@@ -64,5 +64,15 @@ angular.
           console.log(arguments);
         });
       };
+
+      self.submitComment = function (review) {
+        // console.log($routeParams.personId);
+        // console.log(review.commentContent);
+        Comment.save({id: $routeParams.personId, reviewId: review._id}, {content: review.commentContent}, function(comment) {
+          review.comments.push(comment);
+        }, function() {
+          console.log(arguments);
+        });
+      }
     }],
   });

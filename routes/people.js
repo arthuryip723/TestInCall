@@ -89,14 +89,21 @@ router.post('/:id/reviews', function(req, res, next) {
     // });
     // comment.save(function(err, comment){
     //   person.comments.push(comment);
-    //   person.save(function(err, person){
+    //   person.save(function(ersave(r, person){
     //     res.send(comment);
     //   });
     // });
-    person.reviews.push({ content: req.body.content, rating: req.body.rating });
+    let comment = { content: req.body.content, rating: req.body.rating }
+    // let review1 = person.reviews.push({ content: req.body.content, rating: req.body.rating });
+    let length = person.reviews.push(comment);
+    // console.log('----------------------');
+    // console.log('review1: ', review1);
     // Should I update or save here?
-    let review = person.reviews[person.reviews.length - 1];
+    // let review = person.reviews[person.reviews.length - 1];
+    let review = person.reviews[length - 1];
     person.save(function (err) {
+      // console.log('------------------');
+      // console.log(comment);
       // res.send({result: 'success'});
       // console.log(arguments);
       res.send(review);
@@ -108,6 +115,23 @@ router.get('/:id/reviews/:reviewId/comments', function(req, res, next) {
   // res.send({result: 'success'});
   Person.findOne({_id: req.params.id}, {'reviews': {$elemMatch: {_id: req.params.reviewId}}}).exec(function(err, person) {
     res.send(person.reviews[0].comments);
+  });
+});
+
+router.post('/:id/reviews/:reviewId/comments', helpers.authenticate);
+router.post('/:id/reviews/:reviewId/comments', function(req, res, next) {
+  // console.log(req.body);
+  // res.send({content: req.body.content});
+  // res.send({content: 'success'});
+  Person.findOne({_id: req.params.id}, {'reviews': {$elemMatch: {_id: req.params.reviewId}}}).exec(function(err, person) {
+    let length = person.reviews[0].comments.push({content: req.body.content, author: req.decoded._doc._id})
+    // console.log(person);
+    person.save(function (err, person) {
+      // console.log('-------------------');
+      // console.log(person.reviews[0].comments);
+      // console.log(index);
+      res.send(person.reviews[0].comments[length - 1]);
+    });
   });
 });
 

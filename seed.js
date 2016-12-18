@@ -99,6 +99,8 @@ joe.comments.push(comment2._id);
 alex.save();
 joe.save();
 
+console.log("-----------------");
+
 var aaron = new Person({ 
   name: 'Aaron',
   reviews: [{content: 'Aaron is awesome.', rating: 1}],
