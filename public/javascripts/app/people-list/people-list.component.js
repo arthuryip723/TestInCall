@@ -33,17 +33,20 @@ angular.
   module('peopleList').
   component('peopleList', {
     templateUrl: '/javascripts/app/people-list/people-list.template.html',
-    controller: ['$http', 'People', function PeopleListController($http, People) {
+    controller: ['$http', '$routeParams', '$location', 'People', function PeopleListController($http, $routeParams, $location, People) {
     // controller: ['$http', function PeopleListController($http) {
       var self = this;
       // $http.get('api2/people/').then(function(response) {
       //   self.people = response.data;
       // });
-      self.people = People.query({order: 'rating'});
+      self.orderBy = $routeParams.order || 'rating';
+      // self.people = People.query({order: 'rating'});
+      self.people = People.query({order: self.orderBy});
 
       self.changeOrderBy = function () {
         // console.log(self.orderBy);
-        self.people = People.query({order: self.orderBy})
+        $location.search('order', self.orderBy);
+        self.people = People.query({order: self.orderBy});
       };
     }],
   }).

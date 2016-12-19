@@ -9,7 +9,8 @@
 </ul> -->
 <div>
   <label for="order_by">Order By:</label>
-  <select name="order_by" ng-model="$ctrl.orderBy" ng-change="$ctrl.changeOrderBy()" ng-init="$ctrl.orderBy='rating'">
+  <!-- <select name="order_by" ng-model="$ctrl.orderBy" ng-change="$ctrl.changeOrderBy()" ng-init="$ctrl.orderBy='rating'"> -->
+  <select name="order_by" ng-model="$ctrl.orderBy" ng-change="$ctrl.changeOrderBy()">
     <option value="rating">Rating</option>
     <option value="newest">Newest</option>
   </select>

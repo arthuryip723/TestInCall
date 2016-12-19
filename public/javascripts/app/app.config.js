@@ -29,7 +29,8 @@ config(['$locationProvider', '$routeProvider', '$httpProvider',
     $locationProvider.hashPrefix('!');
     $routeProvider.
       when('/people', {
-        template: '<people-list></people-list>'
+        template: '<people-list></people-list>',
+        reloadOnSearch: false,
       }).
       when('/people/new', {
         template: '<person-new></person-new>'
