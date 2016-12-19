@@ -47,15 +47,19 @@ router.get('/', function(req, res, next) {
   // Person.find(function(err, people) {
   //   res.send(people);
   // });
+  // console.log(req.query.order);
+  let sortByObj = req.query.order == 'newest' ? {'created_at': -1} : {'avgRating': -1};
   Person.aggregate([{
     '$project':{
         'name': 1,
         'avatar': 1,
         'avgRating': {
             '$avg': '$reviews.rating'
-            }
+            },
+        'created_at': 1,
         },
-    }, {'$sort': {'avgRating': -1}}]).exec(function(err, people) {
+    // }, {'$sort': {'avgRating': -1}}]).exec(function(err, people) {
+    }, {'$sort': sortByObj }]).exec(function(err, people) {
     res.send(people);
   });
 });

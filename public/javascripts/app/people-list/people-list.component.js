@@ -39,10 +39,11 @@ angular.
       // $http.get('api2/people/').then(function(response) {
       //   self.people = response.data;
       // });
-      self.people = People.query();
+      self.people = People.query({order: 'rating'});
 
       self.changeOrderBy = function () {
-        console.log(self.orderBy);
+        // console.log(self.orderBy);
+        self.people = People.query({order: self.orderBy})
       };
     }],
   }).

@@ -27,6 +27,7 @@ var personSchema = new Schema({
   },
   gallery: [{ type: String }],
   avatar: { type: String},
+  created_at: {type: Date, default: Date.now},
 });
 
 module.exports = mongoose.model('Person', personSchema);
