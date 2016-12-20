@@ -1,26 +1,27 @@
 var mongoose = require('mongoose')
   ,Schema = mongoose.Schema;
 
-var commentSchema = new Schema({
-  content: String,
-  author: { type: Schema.Types.ObjectId, ref: 'User' },
-});
+// var commentSchema = new Schema({
+//   content: String,
+//   author: { type: Schema.Types.ObjectId, ref: 'User' },
+// });
 
-var reviewSchema = new Schema({
-  content: String,
-  rating: Number,
-  // commentSet: { type: Schema.Types.ObjectId, ref: 'CommentSet', default: null },
-  comments: [commentSchema],
-  author: { type: Schema.Types.ObjectId, ref: 'User' },
-});
+// var reviewSchema = new Schema({
+//   content: String,
+//   rating: Number,
+//   // commentSet: { type: Schema.Types.ObjectId, ref: 'CommentSet', default: null },
+//   comments: [commentSchema],
+//   author: { type: Schema.Types.ObjectId, ref: 'User' },
+// });
 
 var personSchema = new Schema({
   name: { type: String},
   description: { type: String},
   phone: { type: String},
-  comments: [{ type: Schema.Types.ObjectId, ref: 'Comment' }],
-  commentSet: {type: Schema.Types.ObjectId, ref: 'CommentSet'},
-  reviews: [reviewSchema],
+  // comments: [{ type: Schema.Types.ObjectId, ref: 'Comment' }],
+  // commentSet: {type: Schema.Types.ObjectId, ref: 'CommentSet'},
+  // reviews: [reviewSchema],
+  reviews: [{type: Schema.Types.ObjectId, ref: 'Review'}],
   user: {
     type: Schema.Types.ObjectId,
     ref: 'User'

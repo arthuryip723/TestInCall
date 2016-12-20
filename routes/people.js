@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var Person = require('../models/person.js');
 var Comment = require('../models/comment.js');
+var Review = require('../models/review.js');
 var User = require('../models/user.js');
 var helpers = require('./helpers.js');
 var multer = require('multer');
@@ -149,7 +150,8 @@ router.get('/:id', function(req, res, next) {
   //     res.send(person);
   //   });
   // })
-  Person.findById(req.params.id, {'reviews.comments': 0}).populate('comments').exec(function(err, person) {
+  // Person.findById(req.params.id, {'reviews.comments': 0}).populate('comments').exec(function(err, person) {
+  Person.findById(req.params.id).populate('reviews').exec(function(err, person) {
     res.send(person);
   });
 });

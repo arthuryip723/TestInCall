@@ -1,19 +1,20 @@
 var mongoose = require('mongoose')
   ,Schema = mongoose.Schema;
 
-var commentSchema = new Schema({
-  // rating: {type: Number, min: 1, max: 5, default: 3},
+var reviewSchema = new Schema({
+  rating: {type: Number, min: 1, max: 5, default: 3},
   content: String,
-  review: {
+  person: {
     type: Schema.Types.ObjectId,
     // type: Number,
-    ref: 'Review',
+    ref: 'Person',
   },
   author: {
   	type: Schema.Types.ObjectId,
   	ref: 'User',
   },
+  comments: [{type: Schema.Types.ObjectId, ref: 'Comment'}],
   created_at: {type: Date, default: Date.now}
 });
 
-module.exports = mongoose.model('Comment', commentSchema);
+module.exports = mongoose.model('Review', reviewSchema);
