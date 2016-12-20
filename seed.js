@@ -91,11 +91,13 @@ var review1 = new Review({
     content: "Alex is great.",
     person: alex._id,
     rating: 3,
+    author: buyer1._id,
 });
 var review2 = new Review({
     content: 'Joe is so-so.',
     person: joe._id,
     rating: 5,
+    author: buyer2._id,
 });
 review1.save();
 review2.save();
@@ -104,6 +106,26 @@ joe.reviews.push(review2._id);
 
 alex.save();
 joe.save();
+
+var comment1 = new Comment({
+  content: "I agreed.",
+  review: review1._id,
+  author: buyer2._id,
+});
+
+var comment2 = new Comment({
+  content: "I disagreed.",
+  review: review2._id,
+  author: buyer1._id,
+});
+
+comment1.save();
+comment2.save();
+
+review1.comments.push(comment1);
+review2.comments.push(comment2);
+review1.save();
+review2.save();
 
 // console.log("-----------------");
 

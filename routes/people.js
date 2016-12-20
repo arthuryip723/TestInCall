@@ -118,8 +118,11 @@ router.post('/:id/reviews', function(req, res, next) {
 
 router.get('/:id/reviews/:reviewId/comments', function(req, res, next) {
   // res.send({result: 'success'});
-  Person.findOne({_id: req.params.id}, {'reviews': {$elemMatch: {_id: req.params.reviewId}}}).exec(function(err, person) {
-    res.send(person.reviews[0].comments);
+  // Person.findOne({_id: req.params.id}, {'reviews': {$elemMatch: {_id: req.params.reviewId}}}).exec(function(err, person) {
+  //   res.send(person.reviews[0].comments);
+  // });
+  Comment.find({review: req.params.reviewId}).exec(function(err, comments) {
+    res.send(comments);
   });
 });
 
