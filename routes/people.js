@@ -85,54 +85,28 @@ router.post('/:id/comments', function(req, res, next) {
 
 router.post('/:id/reviews', helpers.authenticate);
 router.post('/:id/reviews', function(req, res, next) {
-  // console.log(req.body);
-  Person.findById(req.params.id, function(err, person) {
-    // res.send({result: 'success'});
-    // var comment = new Comment({
-    //   content: req.body.content,
-    //   person: person._id,
-    //   rating: req.body.rating,
-    // });
-    // comment.save(function(err, comment){
-    //   person.comments.push(comment);
-    //   person.save(function(ersave(r, person){
-    //     res.send(comment);
-    //   });
-    // });
-    // let comment = { content: req.body.content, rating: req.body.rating }
-    // // let review1 = person.reviews.push({ content: req.body.content, rating: req.body.rating });
-    // let length = person.reviews.push(comment);
-    // // console.log('----------------------');
-    // // console.log('review1: ', review1);
-    // // Should I update or save here?
-    // // let review = person.reviews[person.reviews.length - 1];
-    // let review = person.reviews[length - 1];
-    // person.save(function (err) {
-    //   // console.log('------------------');
-    //   // console.log(comment);
-    //   // res.send({result: 'success'});
-    //   // console.log(arguments);
-    //   res.send(review);
-    // });
+  // avoid duplicate author
+  Review.find({ person: req.params.id, author: req.decoded._doc._id }).exec(function(err, review) {
+    if (review) {
+      res.send({success: false});
+    } else {
+      Person.findById(req.params.id).exec(function(err, person) {
+        let review = new Review({
+          content: req.body.content,
+          rating: req.body.rating,
+          person: req.params.id,
+          author: req.decoded._doc._id,
+        });
 
-
-    Person.findById(req.params.id).exec(function(err, person) {
-      let review = new Review({
-        content: req.body.content,
-        rating: req.body.rating,
-        person: req.params.id,
-        author: req.decoded._doc._id,
-      });
-
-      review.save(function(err, review) {
-        person.reviews.push(review._id);
-        person.save(function(err, person) {
-          res.send(review);
+        review.save(function(err, review) {
+          person.reviews.push(review._id);
+          person.save(function(err, person) {
+            res.send(review);
+          });
         });
       });
-    });
-
-  }); 
+    }
+  });
 });
 
 router.get('/:id/reviews/:reviewId/comments', function(req, res, next) {
