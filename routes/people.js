@@ -83,6 +83,7 @@ router.post('/:id/comments', function(req, res, next) {
   }); 
 });
 
+router.post('/:id/reviews', helpers.authenticate);
 router.post('/:id/reviews', function(req, res, next) {
   // console.log(req.body);
   Person.findById(req.params.id, function(err, person) {
@@ -98,21 +99,39 @@ router.post('/:id/reviews', function(req, res, next) {
     //     res.send(comment);
     //   });
     // });
-    let comment = { content: req.body.content, rating: req.body.rating }
-    // let review1 = person.reviews.push({ content: req.body.content, rating: req.body.rating });
-    let length = person.reviews.push(comment);
-    // console.log('----------------------');
-    // console.log('review1: ', review1);
-    // Should I update or save here?
-    // let review = person.reviews[person.reviews.length - 1];
-    let review = person.reviews[length - 1];
-    person.save(function (err) {
-      // console.log('------------------');
-      // console.log(comment);
-      // res.send({result: 'success'});
-      // console.log(arguments);
-      res.send(review);
+    // let comment = { content: req.body.content, rating: req.body.rating }
+    // // let review1 = person.reviews.push({ content: req.body.content, rating: req.body.rating });
+    // let length = person.reviews.push(comment);
+    // // console.log('----------------------');
+    // // console.log('review1: ', review1);
+    // // Should I update or save here?
+    // // let review = person.reviews[person.reviews.length - 1];
+    // let review = person.reviews[length - 1];
+    // person.save(function (err) {
+    //   // console.log('------------------');
+    //   // console.log(comment);
+    //   // res.send({result: 'success'});
+    //   // console.log(arguments);
+    //   res.send(review);
+    // });
+
+
+    Person.findById(req.params.id).exec(function(err, person) {
+      let review = new Review({
+        content: req.body.content,
+        rating: req.body.rating,
+        person: req.params.id,
+        author: req.decoded._doc._id,
+      });
+
+      review.save(function(err, review) {
+        person.reviews.push(review._id);
+        person.save(function(err, person) {
+          res.send(review);
+        });
+      });
     });
+
   }); 
 });
 
@@ -131,14 +150,27 @@ router.post('/:id/reviews/:reviewId/comments', function(req, res, next) {
   // console.log(req.body);
   // res.send({content: req.body.content});
   // res.send({content: 'success'});
-  Person.findOne({_id: req.params.id}, {'reviews': {$elemMatch: {_id: req.params.reviewId}}}).exec(function(err, person) {
-    let length = person.reviews[0].comments.push({content: req.body.content, author: req.decoded._doc._id})
-    // console.log(person);
-    person.save(function (err, person) {
-      // console.log('-------------------');
-      // console.log(person.reviews[0].comments);
-      // console.log(index);
-      res.send(person.reviews[0].comments[length - 1]);
+  // Person.findOne({_id: req.params.id}, {'reviews': {$elemMatch: {_id: req.params.reviewId}}}).exec(function(err, person) {
+  //   let length = person.reviews[0].comments.push({content: req.body.content, author: req.decoded._doc._id})
+  //   // console.log(person);
+  //   person.save(function (err, person) {
+  //     // console.log('-------------------');
+  //     // console.log(person.reviews[0].comments);
+  //     // console.log(index);
+  //     res.send(person.reviews[0].comments[length - 1]);
+  //   });
+  // });
+  Review.findById(req.params.reviewId).exec(function(err, review) {
+    let comment = new Comment({
+      content: req.body.content,
+      review: req.params.reviewId,
+      author: req.decoded._doc._id,
+    });
+    comment.save(function(err, comment) {
+      review.comments.push(comment._id);
+      review.save(function(err, review) {
+        res.send(comment);
+      });
     });
   });
 });
