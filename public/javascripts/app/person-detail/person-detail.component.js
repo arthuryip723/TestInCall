@@ -43,6 +43,8 @@ angular.
         // return;
         Review.save({id: $routeParams.personId}, { content: self.content, rating: self.rating }, function(review) {
           self.person.reviews.push(review);
+        }, function(resp) {
+          console.log(resp.data.error);
         });
         self.content = '';
       };
