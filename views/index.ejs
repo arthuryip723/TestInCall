@@ -26,6 +26,8 @@
     <script src="/javascripts/app/core/comment/comment.service.js"></script>
     <script src="/javascripts/app/core/authentication/authentication.module.js"></script>
     <script src="/javascripts/app/core/authentication/authentication.service.js"></script>
+    <script src="/javascripts/app/core/flash/flash.module.js"></script>
+    <script src="/javascripts/app/core/flash/flash.service.js"></script>
     <script src="/javascripts/app/people-list/people-list.module.js"></script>
     <script src="/javascripts/app/people-list/people-list.component.js"></script>
     <script src="/javascripts/app/person-detail/person-detail.module.js"></script>
@@ -49,6 +51,10 @@
             <p>Welcome to templating using EJS</p>
         </div>
     </main> -->
+    <div ng-controller="flashCtrl as $ctrl">
+        <p>Message:</p>
+        {{ $ctrl.flash.getMessage() }}
+    </div>
     <main ng-view></main>
 
     <footer>

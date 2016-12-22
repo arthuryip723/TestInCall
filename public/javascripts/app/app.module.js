@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('inCallApp', [
+var app = angular.module('inCallApp', [
   'ngRoute',
   'angularFileUpload',
   'ngFileUpload',
@@ -11,3 +11,9 @@ angular.module('inCallApp', [
   // 'login',
   'header',
 ]);
+
+app.controller('flashCtrl', ['Flash', function(Flash) {
+	var self = this;
+	// self.message = "Some errors!";
+	self.flash = Flash;
+}]);

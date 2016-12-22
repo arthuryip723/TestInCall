@@ -4,7 +4,7 @@ angular.
   module('personDetail').
   component('personDetail', {
     templateUrl: '/javascripts/app/person-detail/person-detail.template.html',
-    controller: ['$routeParams', 'People', 'Comment', 'Review', function PersonDetailController($routeParams, People, Comment, Review) {
+    controller: ['$routeParams', 'People', 'Comment', 'Review', 'Flash', function PersonDetailController($routeParams, People, Comment, Review, Flash) {
       var self = this;
       // this.personId = $routeParams.personId;
 
@@ -39,12 +39,19 @@ angular.
       };
 
       self.submitReview = function () {
+        // if (Flash.getMessage()) Flash.dismiss();
+        // else Flash.setMessage("First Message");
+        // console.log(Flash.getMessage());
+        // return;
         // console.log('submittin review...');
         // return;
         Review.save({id: $routeParams.personId}, { content: self.content, rating: self.rating }, function(review) {
           self.person.reviews.push(review);
+          Flash.dismiss();
         }, function(resp) {
-          console.log(resp.data.error);
+          // console.log(resp.data.error);
+          Flash.setMessage(resp.data.error);
+          // console.log(Flash.getMessage());
         });
         self.content = '';
       };
@@ -62,8 +69,8 @@ angular.
           // console.log(comments);
           review.comments = comments;
           review.commentsDisplayed = true;
-        }, function() {
-          console.log(arguments);
+        }, function(resp) {
+          // console.log(arguments);
         });
       };
 
@@ -73,8 +80,10 @@ angular.
         Comment.save({id: $routeParams.personId, reviewId: review._id}, {content: review.commentContent}, function(comment) {
           review.comments.push(comment);
           review.commentContent = '';
-        }, function() {
-          console.log(arguments);
+          Flash.dismiss();
+        }, function(resp) {
+          // console.log(arguments);
+          Flash.setMessage(resp.data.error);
         });
       }
     }],
