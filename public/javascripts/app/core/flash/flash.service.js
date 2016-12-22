@@ -6,10 +6,20 @@ angular.
     var queue = [];
     var currentMessage = "";
 
-    $rootScope.$on('$routeChangeSuccess', function() {
-      // currentMessage = queue.shift() || "";
+    function dismiss() {
       currentMessage = '';
-    });
+    }
+
+    // $rootScope.$on('$routeChangeSuccess', function() {
+    //   // currentMessage = queue.shift() || "";
+    //   currentMessage = '';
+    // });
+    $rootScope.$on('$routeChangeSuccess', dismiss);
+    // angular.forEach(['$routeChangeSuccess', 'refreshFlash'], function(el) {
+    //   $rootScope.$on(el, function(event) {
+    //     currentMessage = '';
+    //   });
+    // });
 
     return {
       setMessage: function(message) {
@@ -19,8 +29,9 @@ angular.
       getMessage: function() {
         return currentMessage;
       },
-      dismiss: function() {
-        currentMessage = '';
-      } 
+      // dismiss: function() {
+      //   currentMessage = '';
+      // } 
+      dismiss
     };
   }]);
