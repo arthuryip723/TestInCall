@@ -150,7 +150,7 @@ router.post('/:id/reviews/:reviewId/comments', function(req, res, next) {
   });
 });
 
-router.get('/:id', helpers.authenticate);
+// router.get('/:id', helpers.authenticate);
 
 router.get('/:id', function(req, res, next) {
   // res.send({abc:'def'});

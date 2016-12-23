@@ -49,6 +49,8 @@ var people = require('./routes/people');
 var comments = require('./routes/comments');
 var api = require('./routes/api');
 
+// var helpers = require('./routes/helpers.js');
+
 var app = express();
 
 // view engine setup
@@ -80,6 +82,8 @@ app.use(passport.session());
 //   function(req, res) {
 //     res.render('home', { user: req.user });
 //   });
+
+// app.use(helpers.authenticate);
 
 app.get('/login',
   function(req, res){

@@ -33,7 +33,8 @@ config(['$locationProvider', '$routeProvider', '$httpProvider',
         reloadOnSearch: false,
       }).
       when('/people/new', {
-        template: '<person-new></person-new>'
+        template: '<person-new></person-new>',
+        requiresSignIn: true,
       }).
       when('/person/:personId', {
         template: '<person-detail></person-detail>'
@@ -57,13 +58,21 @@ run(['$rootScope', '$location', 'Authentication', function run($rootScope, $loca
   //     $http.defaults.headers.common['Authorization'] = 'Basic ' + $rootScope.globals.currentUser.authdata; // jshint ignore:line
   // }
 
-  $rootScope.$on('$locationChangeStart', function(event, next, current) {
+  // $rootScope.$on('$locationChangeStart', function(event, next, current) {
+  $rootScope.$on('$routeChangeStart', function(event, next, current) {
     // console.log($location.path());
     // debugger
-    var restrictedPage = $.inArray($location.path(), ['', '/', '/people', '/signin', '/signup', '/signup-seller']) === -1;
+    // var restrictedPage = $.inArray($location.path(), ['', '/', '/people', '/signin', '/signup', '/signup-seller']) === -1;
 
-    if (restrictedPage && !Authentication.isSignedIn()) {
-      // debugger
+    // if (restrictedPage && !Authentication.isSignedIn()) {
+    //   // debugger
+    //   $location.path('/signin');
+    //   return;
+    // }
+    // console.log(next);
+    // console.log("requiresSignIn:", next.requiresSignIn);
+    // console.log(next.template);
+    if (next.requiresSignIn && !Authentication.isSignedIn()) {
       $location.path('/signin');
       return;
     }
@@ -71,6 +80,7 @@ run(['$rootScope', '$location', 'Authentication', function run($rootScope, $loca
     // var buyerRestrictedPage = true;
     if (buyerRestrictedPage && !Authentication.isSeller()) {
       $location.path('/');
+      return;
     }
   });
 }]);

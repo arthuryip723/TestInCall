@@ -1,3 +1,4 @@
+// I think I actually don't need this route file. I may delete this later.
 var express = require('express');
 var router = express.Router();
 var Comment = require('../models/comment.js');
