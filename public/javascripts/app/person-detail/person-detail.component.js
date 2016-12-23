@@ -4,9 +4,10 @@ angular.
   module('personDetail').
   component('personDetail', {
     templateUrl: '/javascripts/app/person-detail/person-detail.template.html',
-    controller: ['$routeParams', 'People', 'Comment', 'Review', 'Flash', function PersonDetailController($routeParams, People, Comment, Review, Flash) {
+    controller: ['$routeParams', 'People', 'Comment', 'Review', 'Flash', 'Authentication', function PersonDetailController($routeParams, People, Comment, Review, Flash, Authentication) {
       var self = this;
       // this.personId = $routeParams.personId;
+      self.Authentication = Authentication;
 
       self.person = People.get({id: $routeParams.personId}, function(person) {
         // console.log(arguments);

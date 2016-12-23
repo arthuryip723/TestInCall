@@ -60,7 +60,7 @@
             {{ comment.content }}
           </li>
         </ul>
-        <form ng-submit="$ctrl.submitComment(review)">
+        <form ng-submit="$ctrl.submitComment(review)" ng-if="$ctrl.Authentication.isSignedIn()">
           <textarea ng-model="review.commentContent"></textarea><button>Comment</button>
         </form>
       </div>
