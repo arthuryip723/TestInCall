@@ -124,7 +124,9 @@ router.get('/:id/reviews/:reviewId/comments', function(req, res, next) {
   // Person.findOne({_id: req.params.id}, {'reviews': {$elemMatch: {_id: req.params.reviewId}}}).exec(function(err, person) {
   //   res.send(person.reviews[0].comments);
   // });
-  Comment.find({review: req.params.reviewId}).exec(function(err, comments) {
+  let page = parseInt(req.query.page)
+  let skips = ((page && page > 1) ? (page - 1) : 0) * 5;
+  Comment.find({review: req.params.reviewId}).sort({created_at: -1}).limit(5).skip(skips).exec(function(err, comments) {
     res.send(comments);
   });
 });

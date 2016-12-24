@@ -63,6 +63,7 @@
         <form ng-submit="$ctrl.submitComment(review)" ng-if="$ctrl.Authentication.isSignedIn()">
           <textarea ng-model="review.commentContent"></textarea><button>Comment</button>
         </form>
+        <button ng-click="$ctrl.prevComments(review)">Prev Comments</button><button ng-click="$ctrl.nextComments(review)">Next Comments</button>
       </div>
     </li>
   </ul>

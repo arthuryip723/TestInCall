@@ -87,7 +87,9 @@ angular.
         // console.log($routeParams.personId);
         // console.log(review.commentContent);
         Comment.save({id: $routeParams.personId, reviewId: review._id}, {content: review.commentContent}, function(comment) {
-          review.comments.push(comment);
+          // review.comments.push(comment);
+          review.comments.unshift(comment);
+          review.comments = review.comments.slice(0, 5);
           review.commentContent = '';
           Flash.dismiss();
         }, function(resp) {
@@ -112,6 +114,21 @@ angular.
         Review.query({id: $routeParams.personId, page: self.page}, function(reviews) {
           self.reviews = reviews;
         });        
+      };
+
+      self.prevComments = function (review) {
+        review.currentPage = review.currentPage || 1;
+        review.currentPage -= 1;
+        if (review.currentPage < 1) review.currentPage = 1;        
+        review.comments = Comment.query({id: $routeParams.personId, reviewId: review._id, page: review.currentPage});
+      };
+
+      self.nextComments = function (review) {
+        review.currentPage = review.currentPage || 1;
+        review.currentPage += 1;
+        // let totalPages = Math.ceil(review.comments.length / 5);
+        // if (review.currentPage > totalPages) review.currentPage = totalPages;
+        review.comments = Comment.query({id: $routeParams.personId, reviewId: review._id, page: review.currentPage});
       };
     }],
   });
