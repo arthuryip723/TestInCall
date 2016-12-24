@@ -90,19 +90,19 @@ seller1.people.push(joe._id);
 var review1 = new Review({
     content: "Alex is great.",
     person: alex._id,
-    rating: 3,
+    rating: 5,
     author: buyer1._id,
 });
 var review2 = new Review({
     content: 'Joe is so-so.',
     person: joe._id,
-    rating: 5,
+    rating: 1,
     author: buyer2._id,
 });
 review1.save();
 review2.save();
-alex.reviews.push(review1._id);
-joe.reviews.push(review2._id);
+alex.reviews.push({rating: review1.rating, review: review1._id});
+joe.reviews.push({rating: review2.rating, review: review2._id});
 
 alex.save();
 joe.save();

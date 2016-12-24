@@ -83,6 +83,14 @@ router.post('/:id/comments', function(req, res, next) {
   }); 
 });
 
+router.get('/:id/reviews', function(req, res, next) {
+  let page = parseInt(req.query.page)
+  let skips = ((page && page > 1) ? (page - 1) : 0) * 5;
+  Review.find({ person: req.params.id }).sort({created_at: -1}).limit(5).skip(skips).exec(function(err, reviews) {
+    res.send(reviews);
+  });
+});
+
 router.post('/:id/reviews', helpers.authenticate);
 router.post('/:id/reviews', function(req, res, next) {
   // avoid duplicate author
@@ -100,8 +108,9 @@ router.post('/:id/reviews', function(req, res, next) {
         });
 
         review.save(function(err, review) {
-          person.reviews.push(review._id);
+          person.reviews.push({rating: review.rating, review: review._id});
           person.save(function(err, person) {
+            // res.send({rating: review.rating, review});
             res.send(review);
           });
         });
@@ -161,7 +170,7 @@ router.get('/:id', function(req, res, next) {
   //   });
   // })
   // Person.findById(req.params.id, {'reviews.comments': 0}).populate('comments').exec(function(err, person) {
-  Person.findById(req.params.id).populate('reviews').exec(function(err, person) {
+  Person.findById(req.params.id).populate('reviews.review').exec(function(err, person) {
     res.send(person);
   });
 });

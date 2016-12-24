@@ -9,12 +9,17 @@ angular.
       // this.personId = $routeParams.personId;
       self.Authentication = Authentication;
 
+      self.page = 1;
+
       self.person = People.get({id: $routeParams.personId}, function(person) {
         // console.log(arguments);
         // don't show the comment when first load
         // set a flag for each review to be false at first
         // load comment will toggle that flag
+        self.totalPages = Math.ceil(person.reviews.length / 5);
       });
+
+      self.reviews = Review.query({id: $routeParams.personId});
 
       self.rating = "3";
 
@@ -47,7 +52,10 @@ angular.
         // console.log('submittin review...');
         // return;
         Review.save({id: $routeParams.personId}, { content: self.content, rating: self.rating }, function(review) {
-          self.person.reviews.push(review);
+          // self.person.reviews.push(review);
+          // self.reviews.push(review);
+          self.reviews.unshift(review);
+          self.reviews = self.reviews.slice(0, 5);
           Flash.dismiss();
         }, function(resp) {
           // console.log(resp.data.error);
@@ -86,6 +94,24 @@ angular.
           // console.log(arguments);
           Flash.setMessage(resp.data.error);
         });
-      }
+      };
+
+      self.prevReviews = function () {
+        self.page -= 1;
+        self.page = self.page >= 0 ? self.page : 0;
+        Review.query({id: $routeParams.personId, page: self.page}, function(reviews) {
+          self.reviews = reviews;
+        });
+      };
+
+      self.nextReviews = function () {
+        // console.log(self.page);
+        self.page += 1;
+        self.page = self.page <= self.totalPages ? self.page : self.totalPages;
+        // console.log(self.page);
+        Review.query({id: $routeParams.personId, page: self.page}, function(reviews) {
+          self.reviews = reviews;
+        });        
+      };
     }],
   });

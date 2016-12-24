@@ -21,7 +21,7 @@ var personSchema = new Schema({
   // comments: [{ type: Schema.Types.ObjectId, ref: 'Comment' }],
   // commentSet: {type: Schema.Types.ObjectId, ref: 'CommentSet'},
   // reviews: [reviewSchema],
-  reviews: [{type: Schema.Types.ObjectId, ref: 'Review'}],
+  reviews: [{rating: Number, review: {type: Schema.Types.ObjectId, ref: 'Review'}}],
   user: {
     type: Schema.Types.ObjectId,
     ref: 'User'

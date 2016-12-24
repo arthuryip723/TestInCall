@@ -43,7 +43,7 @@
 <div>
   <div>Reviews:</div>
   <ul>
-    <li ng-repeat="review in $ctrl.person.reviews">
+    <li ng-repeat="review in $ctrl.reviews">
       <div>
         {{ review.rating }}
       </div>
@@ -66,6 +66,7 @@
       </div>
     </li>
   </ul>
+  <button ng-click="$ctrl.prevReviews()">Prev</button><button ng-click="$ctrl.nextReviews()">Next</button>
   <form ng-submit="$ctrl.submitReview()">
     <label for="rating">Rating:</label>
     <select name="rating" ng-model="$ctrl.rating">
