@@ -29,11 +29,11 @@ angular.
         console.log(resp);
       });*/
 
-      Review.count({ personId: $routeParams.personId }, function (resp) {
-        // console.log(resp);
-        self.reviewsCount = resp.count;
-        // console.log(reviewsCount);
-      });
+      // Review.count({ personId: $routeParams.personId }, function (resp) {
+      //   // console.log(resp);
+      //   self.reviewsCount = resp.count;
+      //   // console.log(reviewsCount);
+      // });
 
       self.rating = "3";
 
@@ -82,6 +82,9 @@ angular.
           // console.log(Flash.getMessage());
         });
         self.content = '';
+        Review.count({ personId: $routeParams.personId }, function (resp) {
+          self.totalPages = Math.ceil(resp.count / 5);
+        });
       };
 
       self.loadComments = function (review) {
@@ -154,7 +157,10 @@ angular.
         // console.log(page);
         Review.query({personId: $routeParams.personId, page}, function(reviews) {
           self.reviews = reviews;
-        });  
+        });
+        Review.count({ personId: $routeParams.personId }, function (resp) {
+          self.totalPages = Math.ceil(resp.count / 5);
+        });
       };
     }],
   });
