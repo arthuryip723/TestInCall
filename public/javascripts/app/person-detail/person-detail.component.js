@@ -4,7 +4,7 @@ angular.
   module('personDetail').
   component('personDetail', {
     templateUrl: '/javascripts/app/person-detail/person-detail.template.html',
-    controller: ['$routeParams', 'People', 'Comment', 'Review', 'Flash', 'Authentication', function PersonDetailController($routeParams, People, Comment, Review, Flash, Authentication) {
+    controller: ['$routeParams', '$http', 'People', 'Comment', 'Review', 'Flash', 'Authentication', function PersonDetailController($routeParams, $http, People, Comment, Review, Flash, Authentication) {
       var self = this;
       // this.personId = $routeParams.personId;
       self.Authentication = Authentication;
@@ -20,6 +20,13 @@ angular.
       });
 
       self.reviews = Review.query({id: $routeParams.personId});
+      // self.reviewsCount = Review.get({id: $routeParams.personId, });
+      $http({
+        method: 'GET',
+        url: '/api2/people/'+ $routeParams.personId + '/reviews_count',
+      }).then(function (resp) {
+        console.log(resp);
+      });
 
       self.rating = "3";
 

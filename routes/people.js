@@ -119,6 +119,13 @@ router.post('/:id/reviews', function(req, res, next) {
   });
 });
 
+router.get('/:id/reviews_count', function(req, res, next) {
+  // console.log(req.params.id);
+  Review.find({person: req.params.id}).count(function(err, count) {
+    res.send({count: count});
+  });
+});
+
 router.get('/:id/reviews/:reviewId/comments', function(req, res, next) {
   // res.send({result: 'success'});
   // Person.findOne({_id: req.params.id}, {'reviews': {$elemMatch: {_id: req.params.reviewId}}}).exec(function(err, person) {
