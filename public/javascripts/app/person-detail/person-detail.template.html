@@ -67,7 +67,7 @@
       </div>
     </li>
   </ul>
-  <button>First</button><button ng-click="$ctrl.prevReviews()">Prev</button><button>Current</button><button ng-click="$ctrl.nextReviews()">Next</button><button>Last</button>
+  <button ng-click="$ctrl.reviewPage(1)">First</button><button ng-click="$ctrl.prevReviews()">Prev</button><button>Current</button><button ng-click="$ctrl.nextReviews()">Next</button><button ng-click="$ctrl.reviewPage($ctrl.Math.ceil($ctrl.currentPage / 5))">Last</button>
   <form ng-submit="$ctrl.submitReview()">
     <label for="rating">Rating:</label>
     <select name="rating" ng-model="$ctrl.rating">

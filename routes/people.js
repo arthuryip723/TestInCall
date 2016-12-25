@@ -125,6 +125,12 @@ router.get('/:id/reviews_count', function(req, res, next) {
     res.send({count: count});
   });
 });
+router.get('/:id/reviews/count', function(req, res, next) {
+  // console.log(req.params.id);
+  Review.find({person: req.params.id}).count(function(err, count) {
+    res.send({count: count});
+  });
+});
 
 router.get('/:id/reviews/:reviewId/comments', function(req, res, next) {
   // res.send({result: 'success'});

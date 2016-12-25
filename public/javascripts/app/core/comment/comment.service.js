@@ -16,10 +16,14 @@ angular.
   ]).
   factory('Review', ['$resource',
     function($resource) {
-      return $resource('api2/people/:id/reviews', {}, {
+      return $resource('api2/people/:personId/reviews/:id', {}, {
         query: {
           method: 'GET',
           isArray: true,
+        },
+        count: {
+          method: 'GET',
+          params: { id: 'count' },
         }
       })
   }]);

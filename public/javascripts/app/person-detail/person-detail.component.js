@@ -7,9 +7,10 @@ angular.
     controller: ['$routeParams', '$http', 'People', 'Comment', 'Review', 'Flash', 'Authentication', function PersonDetailController($routeParams, $http, People, Comment, Review, Flash, Authentication) {
       var self = this;
       // this.personId = $routeParams.personId;
+      self.Math = Math;
       self.Authentication = Authentication;
 
-      self.page = 1;
+      self.currentPage = 1;
 
       self.person = People.get({id: $routeParams.personId}, function(person) {
         // console.log(arguments);
@@ -19,13 +20,19 @@ angular.
         self.totalPages = Math.ceil(person.reviews.length / 5);
       });
 
-      self.reviews = Review.query({id: $routeParams.personId});
+      self.reviews = Review.query({ personId: $routeParams.personId });
       // self.reviewsCount = Review.get({id: $routeParams.personId, });
-      $http({
+      /*$http({
         method: 'GET',
         url: '/api2/people/'+ $routeParams.personId + '/reviews_count',
       }).then(function (resp) {
         console.log(resp);
+      });*/
+
+      Review.count({ personId: $routeParams.personId }, function (resp) {
+        // console.log(resp);
+        self.reviewsCount = resp.count;
+        // console.log(reviewsCount);
       });
 
       self.rating = "3";
@@ -58,7 +65,7 @@ angular.
         // return;
         // console.log('submittin review...');
         // return;
-        Review.save({id: $routeParams.personId}, { content: self.content, rating: self.rating }, function(review) {
+        Review.save({personId: $routeParams.personId}, { content: self.content, rating: self.rating }, function(review) {
           // self.person.reviews.push(review);
           // self.reviews.push(review);
           self.reviews.unshift(review);
@@ -106,19 +113,19 @@ angular.
       };
 
       self.prevReviews = function () {
-        self.page -= 1;
-        self.page = self.page >= 0 ? self.page : 0;
-        Review.query({id: $routeParams.personId, page: self.page}, function(reviews) {
+        self.currentPage -= 1;
+        self.currentPage = self.currentPage >= 0 ? self.currentPage : 0;
+        Review.query({personId: $routeParams.personId, page: self.currentPage}, function(reviews) {
           self.reviews = reviews;
         });
       };
 
       self.nextReviews = function () {
-        // console.log(self.page);
-        self.page += 1;
-        self.page = self.page <= self.totalPages ? self.page : self.totalPages;
-        // console.log(self.page);
-        Review.query({id: $routeParams.personId, page: self.page}, function(reviews) {
+        // console.log(self.currentPage);
+        self.currentPage += 1;
+        self.currentPage = self.currentPage <= self.totalPages ? self.currentPage : self.totalPages;
+        // console.log(self.currentPage);
+        Review.query({personId: $routeParams.personId, page: self.currentPage}, function(reviews) {
           self.reviews = reviews;
         });        
       };
@@ -136,6 +143,10 @@ angular.
         // let totalPages = Math.ceil(review.comments.length / 5);
         // if (review.currentPage > totalPages) review.currentPage = totalPages;
         review.comments = Comment.query({id: $routeParams.personId, reviewId: review._id, page: review.currentPage});
+      };
+
+      self.reviewPage = function (page) {
+        console.log(page);
       };
     }],
   });
