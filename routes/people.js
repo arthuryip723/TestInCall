@@ -139,7 +139,7 @@ router.get('/:id/reviews/:reviewId/comments', function(req, res, next) {
   // });
   let page = parseInt(req.query.page)
   let skips = ((page && page > 1) ? (page - 1) : 0) * 5;
-  Comment.find({review: req.params.reviewId}).sort({created_at: -1}).limit(5).skip(skips).exec(function(err, comments) {
+  Comment.find({review: req.params.reviewId}).sort({created_at: 1}).limit(5).skip(skips).exec(function(err, comments) {
     res.send(comments);
   });
 });

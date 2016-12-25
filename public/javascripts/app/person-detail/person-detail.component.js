@@ -71,10 +71,9 @@ angular.
         // console.log('submittin review...');
         // return;
         Review.save({personId: $routeParams.personId}, { content: self.content, rating: self.rating }, function(review) {
-          // self.person.reviews.push(review);
-          // self.reviews.push(review);
-          self.reviews.unshift(review);
-          self.reviews = self.reviews.slice(0, 5);
+          // self.reviews.unshift(review);
+          // self.reviews = self.reviews.slice(0, 5);
+          self.reviewPage(1);
           Flash.dismiss();
         }, function(resp) {
           // console.log(resp.data.error);
