@@ -95,7 +95,7 @@ router.post('/:id/reviews', helpers.authenticate);
 router.post('/:id/reviews', function(req, res, next) {
   // avoid duplicate author
   Review.find({ person: req.params.id, author: req.decoded._doc._id }).exec(function(err, reviews) {
-    if (reviews.length > 0) {
+    if (reviews.length > 0 && false) {
       // console.log(review);
       res.status(409).send({error: "Duplicate review."});
     } else {

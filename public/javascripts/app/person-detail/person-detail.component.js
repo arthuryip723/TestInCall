@@ -7,7 +7,7 @@ angular.
     controller: ['$routeParams', '$http', 'People', 'Comment', 'Review', 'Flash', 'Authentication', function PersonDetailController($routeParams, $http, People, Comment, Review, Flash, Authentication) {
       var self = this;
       // this.personId = $routeParams.personId;
-      self.Math = Math;
+      // self.Math = Math;
       self.Authentication = Authentication;
 
       self.currentPage = 1;
@@ -36,6 +36,11 @@ angular.
       });
 
       self.rating = "3";
+
+      // self.maxReviewPage = function () {
+      //   // debugger
+      //   return Math.ceil(self.totalPages / 5) || 1;
+      // };
 
       self.averageRating = function() {
         if (!self.person.comments) return 0;
@@ -146,7 +151,10 @@ angular.
       };
 
       self.reviewPage = function (page) {
-        console.log(page);
+        // console.log(page);
+        Review.query({personId: $routeParams.personId, page}, function(reviews) {
+          self.reviews = reviews;
+        });  
       };
     }],
   });
