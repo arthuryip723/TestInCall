@@ -78,7 +78,7 @@ angular.
         }, function(resp) {
           // console.log(resp.data.error);
           Flash.setMessage(resp.data.error);
-          // console.log(Flash.getMessage());
+          // console.log(Flash.getM}}}essage());
         });
         self.content = '';
         Review.count({ personId: $routeParams.personId }, function (resp) {
@@ -94,25 +94,34 @@ angular.
         //   comments: [{content: 'comment 1'}, {content: 'comment 2'}],
         // };
         // review.commentss = [{content: 'comment 1'}, {content: 'comment 2'}];
-        Comment.query({id: $routeParams.personId, reviewId: review._id}, function(comments) {
+        Comment.query({personId: $routeParams.personId, reviewId: review._id}, function(comments) {
           // console.log(arguments);
           // console.log(comments);
           review.comments = comments;
           review.commentsDisplayed = true;
+          review.currentPage = 1;
         }, function(resp) {
           // console.log(arguments);
+        });
+
+        Comment.count({ personId: $routeParams.personId, reviewId: review._id}, function(resp) {
+          review.totalPages = Math.ceil(resp.count / 5);
         });
       };
 
       self.submitComment = function (review) {
         // console.log($routeParams.personId);
         // console.log(review.commentContent);
-        Comment.save({id: $routeParams.personId, reviewId: review._id}, {content: review.commentContent}, function(comment) {
+        Comment.save({personId: $routeParams.personId, reviewId: review._id}, {content: review.commentContent}, function(comment) {
           // review.comments.push(comment);
-          review.comments.unshift(comment);
-          review.comments = review.comments.slice(0, 5);
-          review.commentContent = '';
-          Flash.dismiss();
+          // review.comments.unshift(comment);
+          // review.comments = review.comments.slice(0, 5);
+          Comment.count({ personId: $routeParams.personId, reviewId: review._id}, function(resp) {
+            review.totalPages = Math.ceil(resp.count / 5);
+            self.commentPage(review, review.totalPages);
+            review.commentContent = '';
+            Flash.dismiss();
+          });
         }, function(resp) {
           // console.log(arguments);
           Flash.setMessage(resp.data.error);
@@ -141,7 +150,7 @@ angular.
         review.currentPage = review.currentPage || 1;
         review.currentPage -= 1;
         if (review.currentPage < 1) review.currentPage = 1;        
-        review.comments = Comment.query({id: $routeParams.personId, reviewId: review._id, page: review.currentPage});
+        review.comments = Comment.query({personId: $routeParams.personId, reviewId: review._id, page: review.currentPage});
       };
 
       self.nextComments = function (review) {
@@ -149,13 +158,23 @@ angular.
         review.currentPage += 1;
         // let totalPages = Math.ceil(review.comments.length / 5);
         // if (review.currentPage > totalPages) review.currentPage = totalPages;
-        review.comments = Comment.query({id: $routeParams.personId, reviewId: review._id, page: review.currentPage});
+        review.comments = Comment.query({personId: $routeParams.personId, reviewId: review._id, page: review.currentPage});
+      };
+
+      self.commentPage = function (review, page) {
+        review.comments = Comment.query({personId: $routeParams.personId, reviewId: review._id, page }, function(comments) {
+          review.currentPage = page;
+        });
+        Comment.count({personId: $routeParams.personId, reviewId: review._id}, function(resp) {
+          review.totalPages = Math.ceil(resp.count / 5);
+        });
       };
 
       self.reviewPage = function (page) {
         // console.log(page);
         Review.query({personId: $routeParams.personId, page}, function(reviews) {
           self.reviews = reviews;
+          self.currentPage = page;
         });
         Review.count({ personId: $routeParams.personId }, function (resp) {
           self.totalPages = Math.ceil(resp.count / 5);

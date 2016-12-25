@@ -95,7 +95,8 @@ router.post('/:id/reviews', helpers.authenticate);
 router.post('/:id/reviews', function(req, res, next) {
   // avoid duplicate author
   Review.find({ person: req.params.id, author: req.decoded._doc._id }).exec(function(err, reviews) {
-    if (reviews.length > 0 && false) {
+    // if (reviews.length > 0 && false) {
+    if (reviews.length > 0) {
       // console.log(review);
       res.status(409).send({error: "Duplicate review."});
     } else {
@@ -171,6 +172,12 @@ router.post('/:id/reviews/:reviewId/comments', function(req, res, next) {
         res.send(comment);
       });
     });
+  });
+});
+
+router.get('/:id/reviews/:reviewId/comments/count', function(req, res, next) {
+  Comment.find({ review: req.params.reviewId }).count(function(err, count) {
+    res.send({ count: count });
   });
 });
 
