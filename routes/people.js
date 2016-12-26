@@ -6,6 +6,9 @@ var Review = require('../models/review.js');
 var User = require('../models/user.js');
 var helpers = require('./helpers.js');
 var multer = require('multer');
+var mongoose = require('mongoose')
+  ,Schema = mongoose.Schema;
+
 // var fs = require('fs');
 
 // var storage = multer.diskStorage({
@@ -192,9 +195,19 @@ router.get('/:id', function(req, res, next) {
   //   });
   // })
   // Person.findById(req.params.id, {'reviews.comments': 0}).populate('comments').exec(function(err, person) {
-  Person.findById(req.params.id).populate('reviews.review').exec(function(err, person) {
-    res.send(person);
-  });
+  // Person.findById(req.params.id).populate('reviews.review').exec(function(err, person) {
+  //   res.send(person);
+  // });
+  Person.aggregate({ $match: {_id: mongoose.mongo.ObjectId(req.params.id) } }, { $project:
+    { name: 1,
+      description: 1,
+      phone: 1,
+      address: 1,
+      avgRating: { $avg: '$reviews.rating'}
+    } }).exec(function (err, persons) {
+      // console.log(persons)
+      res.send(persons[0]);
+    });
 });
 
 router.post('/', helpers.authenticate);
