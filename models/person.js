@@ -15,9 +15,10 @@ var mongoose = require('mongoose')
 // });
 
 var personSchema = new Schema({
-  name: { type: String},
-  description: { type: String},
-  phone: { type: String},
+  name: { type: String },
+  description: { type: String },
+  phone: { type: String },
+  address: { type: String },
   // comments: [{ type: Schema.Types.ObjectId, ref: 'Comment' }],
   // commentSet: {type: Schema.Types.ObjectId, ref: 'CommentSet'},
   // reviews: [reviewSchema],
