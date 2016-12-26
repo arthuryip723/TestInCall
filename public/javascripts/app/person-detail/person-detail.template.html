@@ -1,8 +1,29 @@
 <div>Person Detail</div>
-<div>Name: {{ $ctrl.person.name }}</div>
-<div>
-  <div class="div-image">
-    <img ng-src="{{ '/uploads/' + ($ctrl.person.avatar || 'default.jpg') }}" class="img-image">
+
+<div class="cotainer-fluid">
+  <div class="row">
+    <div class="col-lg-4">
+      <div class="div-image">
+        <img ng-src="{{ '/uploads/' + ($ctrl.person.avatar || 'default.jpg') }}" class="img-image">
+      </div>
+      <h3 style="text-align: center;">{{ $ctrl.person.name }}</h3>
+    </div>
+    <!-- <div class="col-lg-8 container-fluid">
+      <div class="row">
+        <div class="col-lg-4">Description</div>
+        <div class="col-lg-8">This is my description. This is my description. This is my description. This is my description. This is my description. This is my description. This is my description. </div>
+      </div>
+    </div> -->
+    <div class="col-lg-8">
+      <div>
+      <h4>Description</h4>
+      <p>This is my description. This is my description. This is my description. This is my description. </p>
+      </div>
+      <div>
+      <h4>Telephone</h4>
+      <p>123-456-7890</p>
+      </div>
+    </div>
   </div>
 </div>
 <div class="row">
