@@ -30,6 +30,7 @@ ul {
   height: 240px;
   position: relative;
   margin: 0 auto;
+  border: 1px solid black;
 }
 
 .comments-ul li {

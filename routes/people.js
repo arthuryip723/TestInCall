@@ -7,7 +7,7 @@ var User = require('../models/user.js');
 var helpers = require('./helpers.js');
 var multer = require('multer');
 var mongoose = require('mongoose')
-  ,Schema = mongoose.Schema;
+  // ,Schema = mongoose.Schema;
 
 // var fs = require('fs');
 
@@ -89,7 +89,7 @@ router.post('/:id/comments', function(req, res, next) {
 router.get('/:id/reviews', function(req, res, next) {
   let page = parseInt(req.query.page)
   let skips = ((page && page > 1) ? (page - 1) : 0) * 5;
-  Review.find({ person: req.params.id }).sort({created_at: -1}).limit(5).skip(skips).exec(function(err, reviews) {
+  Review.find({ person: req.params.id }).populate('author').sort({created_at: -1}).limit(5).skip(skips).exec(function(err, reviews) {
     res.send(reviews);
   });
 });
@@ -143,7 +143,7 @@ router.get('/:id/reviews/:reviewId/comments', function(req, res, next) {
   // });
   let page = parseInt(req.query.page)
   let skips = ((page && page > 1) ? (page - 1) : 0) * 5;
-  Comment.find({review: req.params.reviewId}).sort({created_at: 1}).limit(5).skip(skips).exec(function(err, comments) {
+  Comment.find({review: req.params.reviewId}).populate('author').sort({created_at: 1}).limit(5).skip(skips).exec(function(err, comments) {
     res.send(comments);
   });
 });
@@ -203,6 +203,8 @@ router.get('/:id', function(req, res, next) {
       description: 1,
       phone: 1,
       address: 1,
+      reviews: 1,
+      created_at: 1,
       avgRating: { $avg: '$reviews.rating'}
     } }).exec(function (err, persons) {
       // console.log(persons)
