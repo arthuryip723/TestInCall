@@ -39,8 +39,8 @@
     <script src="/javascripts/app/authentication/authentication.module.js"></script>
     <script src="/javascripts/app/authentication/authentication.component.js"></script>
 </head>
-<body class="container">
-<!-- <body> -->
+<!-- <body class="container"> -->
+<body>
 
     <header>
         <% include ./partials/header %>
@@ -52,15 +52,17 @@
             <p>Welcome to templating using EJS</p>
         </div>
     </main> -->
+    <main class="container">
     <div ng-controller="flashCtrl as $ctrl">
         <p>Message:</p>
         {{ $ctrl.flash.getMessage() }}
     </div>
     <main ng-view></main>
 
-    <footer>
+    <footer class="container">
         <% include ./partials/footer %>
     </footer>
+    </main>
     
 </body>
 </html>
