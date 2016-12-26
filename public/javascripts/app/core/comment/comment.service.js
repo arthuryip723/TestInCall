@@ -5,8 +5,8 @@ angular.
   factory('Comment', ['$resource',
     function($resource){
       // The second argument is for paramDefaults
-      // return $resource('api2/people/:id/comments', {}, {
-      return $resource('api2/people/:personId/reviews/:reviewId/comments/:id', {}, {
+      // return $resource('api/people/:id/comments', {}, {
+      return $resource('api/people/:personId/reviews/:reviewId/comments/:id', {}, {
         // query: {
         //   method: 'GET',
         //   isArray: true,
@@ -20,7 +20,7 @@ angular.
   ]).
   factory('Review', ['$resource',
     function($resource) {
-      return $resource('api2/people/:personId/reviews/:id', {}, {
+      return $resource('api/people/:personId/reviews/:id', {}, {
         // query: {
         //   method: 'GET',
         //   isArray: true,

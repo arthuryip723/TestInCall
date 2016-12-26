@@ -24,7 +24,7 @@ angular.
       // self.reviewsCount = Review.get({id: $routeParams.personId, });
       /*$http({
         method: 'GET',
-        url: '/api2/people/'+ $routeParams.personId + '/reviews_count',
+        url: '/api/people/'+ $routeParams.personId + '/reviews_count',
       }).then(function (resp) {
         console.log(resp);
       });*/

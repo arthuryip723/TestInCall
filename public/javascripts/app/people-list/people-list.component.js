@@ -36,7 +36,7 @@ angular.
     controller: ['$http', '$routeParams', '$location', 'People', function PeopleListController($http, $routeParams, $location, People) {
     // controller: ['$http', function PeopleListController($http) {
       var self = this;
-      // $http.get('api2/people/').then(function(response) {
+      // $http.get('api/people/').then(function(response) {
       //   self.people = response.data;
       // });
       self.orderBy = $routeParams.order || 'rating';
@@ -77,7 +77,7 @@ angular.
         // formData.append('image', self.imageIns[0]);
         // $http({
         //   method: 'POST',
-        //   url: 'api2/people/',
+        //   url: 'api/people/',
         //   data: formData,
         //   headers: {'Content-Type': 'application/x-www-form-urlencoded'},
         // }).then(function(resp) {
@@ -89,7 +89,7 @@ angular.
           return el.input;
         });
         Upload.upload({
-          url: 'api2/people/',
+          url: 'api/people/',
           arrayKey: '',
           // objectKey: '.k',
           // data: {file: self.file, name: self.name},
