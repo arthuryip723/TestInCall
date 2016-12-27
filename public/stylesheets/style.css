@@ -72,3 +72,11 @@ textarea.description-textarea {
 .person-div a {
   display: block;
 }
+
+.li-header-login {
+  padding-top: 15px;
+}
+
+.form-header-login {
+  display: inline-block;
+}

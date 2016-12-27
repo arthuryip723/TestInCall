@@ -17,3 +17,13 @@ app.controller('flashCtrl', ['Flash', function(Flash) {
 	// self.message = "Some errors!";
 	self.flash = Flash;
 }]);
+
+app.controller('headerCtrl', ['Authentication', function(Authentication) {
+  var self = this;
+  self.isSignedIn = Authentication.isSignedIn;
+  self.getUserName = Authentication.getUserName;
+  self.submit = function() {
+    Authentication.signIn({name: self.name, password: self.password});
+  };
+  self.signOut = Authentication.signOut;
+}]);

@@ -28,9 +28,26 @@
                 <li><a href="#">About</a></li>
                 <li><a href="#">Contact</a></li>
             </ul>
-            <ul class="nav navbar-nav navbar-right">
+            <!-- <ul class="nav navbar-nav navbar-right">
                 <li><a href="#">Sign In</a></li>
                 <li><a href="#">Sign Up</a></li>
+            </ul> -->
+            <ul class="nav navbar-nav navbar-right" ng-controller="headerCtrl as $ctrl">
+                <!-- <a href="#!/login">Login</a> -->
+                <li ng-if='$ctrl.isSignedIn()' class="li-header-login">
+                  <span>Hello {{ $ctrl.getUserName() }}!</span>
+                  <button ng-click="$ctrl.signOut()">Sign Out</button>
+                </li>
+                <li ng-if='!$ctrl.isSignedIn()' class="li-header-login"><!-- Not Logged In! -->
+                <!-- <a href="#!/signin">Sign In</a> -->
+                  <form ng-submit="$ctrl.submit()" class="form-header-login">
+                    <label>Username: <input type="text" ng-model="$ctrl.name"></label>
+                    <label>Password: <input type="password" ng-model="$ctrl.password"></label>
+                    <button>Sign In</button>
+                  </form>
+                     <span><!-- Not registered?  --><a href="#!/signup">Sign Up</a></span>
+                     <span><!-- Seller?  --><a href="#!/signup-seller">Seller Sign Up</a></span>
+                </li>
             </ul>
         </div>
     </div>
