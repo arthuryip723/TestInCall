@@ -35,6 +35,7 @@
             <ul class="nav navbar-nav navbar-right" ng-controller="headerCtrl as $ctrl">
                 <!-- <a href="#!/login">Login</a> -->
                 <li ng-if='$ctrl.isSignedIn()' class="li-header-login">
+                  <a href="#!/people/new" ng-if="$ctrl.isSeller()">Create a person</a>
                   <span>Hello {{ $ctrl.getUserName() }}!</span>
                   <button ng-click="$ctrl.signOut()">Sign Out</button>
                 </li>

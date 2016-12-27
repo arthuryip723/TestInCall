@@ -22,6 +22,7 @@ app.controller('headerCtrl', ['Authentication', function(Authentication) {
   var self = this;
   self.isSignedIn = Authentication.isSignedIn;
   self.getUserName = Authentication.getUserName;
+  self.isSeller = Authentication.isSeller;
   self.submit = function() {
     Authentication.signIn({name: self.name, password: self.password});
   };
