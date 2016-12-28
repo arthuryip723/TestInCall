@@ -10,6 +10,7 @@ var app = angular.module('inCallApp', [
   'authentication',
   // 'login',
   'header',
+  // 'ui.bootstrap',
 ]);
 
 app.controller('flashCtrl', ['Flash', function(Flash) {

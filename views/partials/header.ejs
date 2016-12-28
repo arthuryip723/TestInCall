@@ -34,8 +34,20 @@
             </ul> -->
             <ul class="nav navbar-nav navbar-right" ng-controller="headerCtrl as $ctrl">
                 <!-- <a href="#!/login">Login</a> -->
+                <li ng-if='$ctrl.isSignedIn()' class="dropdown">
+                  <a href class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                      <li><a href="#">Action</a></li>
+                      <li><a href="#">Another action</a></li>
+                      <li><a href="#">Something else here</a></li>
+                      <li role="separator" class="divider"></li>
+                      <li class="dropdown-header">Nav header</li>
+                      <li><a href="#">Separated link</a></li>
+                      <li><a href="#">One more separated link</a></li>
+                    </ul>
+                </li>
                 <li ng-if='$ctrl.isSignedIn()' class="li-header-login">
-                  <a href="#!/people/new" ng-if="$ctrl.isSeller()">Create a person</a>
+                  <!-- <a href="#!/people/new" ng-if="$ctrl.isSeller()">Create a person</a> -->
                   <span>Hello {{ $ctrl.getUserName() }}!</span>
                   <button ng-click="$ctrl.signOut()">Sign Out</button>
                 </li>
