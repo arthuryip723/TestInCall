@@ -17,7 +17,7 @@
       
     </div>
 </nav> -->
-<nav class="navbar navbar-default">
+<nav class="navbar navbar-default" ng-controller="headerCtrl as $ctrl">
     <div class="container">
         <div class="navbar-header">
             <a class="navbar-brand">In Call</a>
@@ -32,18 +32,18 @@
                 <li><a href="#">Sign In</a></li>
                 <li><a href="#">Sign Up</a></li>
             </ul> -->
-            <ul class="nav navbar-nav navbar-right" ng-controller="headerCtrl as $ctrl">
+            <ul class="nav navbar-nav navbar-right">
                 <!-- <a href="#!/login">Login</a> -->
                 <li ng-if='$ctrl.isSignedIn()' class="dropdown">
-                  <a href class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+                  <a href class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">My InCall <span class="caret"></span></a>
                     <ul class="dropdown-menu dropdown-menu-left">
-                      <li><a href="#">Action</a></li>
-                      <li><a href="#">Another action</a></li>
-                      <li><a href="#">Something else here</a></li>
-                      <li role="separator" class="divider"></li>
+                      <li><a href="#!/users/people">My People</a></li>
+                      <li><a href="#!/people/new">Create A Person</a></li>
+                      <!-- <li><a href="#">Something else here</a></li> -->
+                      <!-- <li role="separator" class="divider"></li>
                       <li class="dropdown-header">Nav header</li>
                       <li><a href="#">Separated link</a></li>
-                      <li><a href="#">One more separated link</a></li>
+                      <li><a href="#">One more separated link</a></li> -->
                     </ul>
                 </li>
                 <li ng-if='$ctrl.isSignedIn()' class="li-header-login">
@@ -53,15 +53,15 @@
                 </li>
                 <li ng-if='!$ctrl.isSignedIn()' class="li-header-login"><!-- Not Logged In! -->
                 <!-- <a href="#!/signin">Sign In</a> -->
-                  <form ng-submit="$ctrl.submit()" class="form-header-login">
-                    <label>Username: <input type="text" ng-model="$ctrl.name"></label>
-                    <label>Password: <input type="password" ng-model="$ctrl.password"></label>
-                    <button>Sign In</button>
-                  </form>
                      <span><!-- Not registered?  --><a href="#!/signup">Sign Up</a></span>
                      <span><!-- Seller?  --><a href="#!/signup-seller">Seller Sign Up</a></span>
                 </li>
             </ul>
+              <form ng-submit="$ctrl.submit()" ng-if="!$ctrl.isSignedIn()" class="form-header-login navbar-form navbar-right">
+                <div class="form-group"><input type="text" placeholder="Email" ng-model="$ctrl.name" class="form-control"></div>
+                <div class="form-group"><input type="password" placeholder="Password" ng-model="$ctrl.password" class="form-control"></div>
+                <button class="btn btn-success">Sign In</button>
+              </form>
         </div>
     </div>
 </nav>
