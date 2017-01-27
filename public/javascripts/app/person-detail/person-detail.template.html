@@ -1,4 +1,4 @@
-<div>Person Detail</div>
+<!-- <div>Person Detail</div> -->
 
 <div class="cotainer-fluid">
   <div class="row">
@@ -69,6 +69,30 @@
     <button>Comment</button>
   </form> -->
 <!-- </div> -->
+<div>
+  <div>Reviews:</div>
+  <ul>
+    <li ng-repeat="review in $ctrl.reviews">
+      <div class="media">
+        <div class="media-left"><div style="width:128px;height:128px;">{{ review.author.name }}</div></div>
+        <div class="media-body">
+          <h4 class="media-heading">Heading</h4>
+          <div>{{ review.content }}</div>
+          <ul>
+            <li ng-repeat="comment in review.comments">
+              <div class="media">
+                <div class="media-left"><div style="width:128px;height:128px;">{{ comment.author.name }}</div></div>
+                <div class="media-body">
+                  <p>{{ comment.content }}</p>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>
 <div>
   <div>Reviews:</div>
   <ul>
