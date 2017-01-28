@@ -5,6 +5,7 @@ angular.
   component('personDetail', {
     templateUrl: '/javascripts/app/person-detail/person-detail.template.html',
     controller: ['$routeParams', '$http', 'People', 'Comment', 'Review', 'Flash', 'Authentication', function PersonDetailController($routeParams, $http, People, Comment, Review, Flash, Authentication) {
+    // controller: ['$routeParams', '$http', 'People', 'Comment', 'Review', 'Authentication', function PersonDetailController($routeParams, $http, People, Comment, Review, Authentication) {
       var self = this;
       // this.personId = $routeParams.personId;
       // self.Math = Math;
@@ -74,16 +75,25 @@ angular.
           // self.reviews.unshift(review);
           // self.reviews = self.reviews.slice(0, 5);
           self.reviewPage(1);
-          Flash.dismiss();
+          // Flash.dismiss();
         }, function(resp) {
           // console.log(resp.data.error);
-          Flash.setMessage(resp.data.error);
+          // Flash.setMessage(resp.data.error);
           // console.log(Flash.getM}}}essage());
         });
         self.content = '';
         Review.count({ personId: $routeParams.personId }, function (resp) {
           self.totalPages = Math.ceil(resp.count / 5);
         });
+      };
+
+      self.testFlash = function () {
+        var message = '<strong> Well done!</strong>  You successfully read this important alert message.';
+        var id = Flash.create('success', message, 0, {class: 'custom-class', id: 'custom-id'}, true);
+      };
+
+      self.clearFlash = function () {
+        Flash.clear();
       };
 
       self.loadComments = function (review) {
@@ -120,11 +130,11 @@ angular.
             review.totalPages = Math.ceil(resp.count / 5);
             self.commentPage(review, review.totalPages);
             review.commentContent = '';
-            Flash.dismiss();
+            // Flash.dismiss();
           });
         }, function(resp) {
           // console.log(arguments);
-          Flash.setMessage(resp.data.error);
+          // Flash.setMessage(resp.data.error);
         });
       };
 
@@ -143,13 +153,13 @@ angular.
         // console.log(self.currentPage);
         Review.query({personId: $routeParams.personId, page: self.currentPage}, function(reviews) {
           self.reviews = reviews;
-        });        
+        });
       };
 
       self.prevComments = function (review) {
         review.currentPage = review.currentPage || 1;
         review.currentPage -= 1;
-        if (review.currentPage < 1) review.currentPage = 1;        
+        if (review.currentPage < 1) review.currentPage = 1;
         review.comments = Comment.query({personId: $routeParams.personId, reviewId: review._id, page: review.currentPage});
       };
 

@@ -19,16 +19,17 @@
         </div>
     </main> -->
     <main class="container">
-    <div ng-controller="flashCtrl as $ctrl">
+    <!-- <div ng-controller="flashCtrl as $ctrl">
         <p>Message:</p>
         {{ $ctrl.flash.getMessage() }}
-    </div>
+    </div> -->
+    <flash-message></flash-message>
     <main ng-view></main>
 
     <footer class="container">
         <% include ./partials/footer %>
     </footer>
     </main>
-    
+
 </body>
 </html>

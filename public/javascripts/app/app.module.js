@@ -11,13 +11,14 @@ var app = angular.module('inCallApp', [
   // 'login',
   'header',
   // 'ui.bootstrap',
+  'ngFlash',
 ]);
 
-app.controller('flashCtrl', ['Flash', function(Flash) {
-	var self = this;
-	// self.message = "Some errors!";
-	self.flash = Flash;
-}]);
+// app.controller('flashCtrl', ['Flash', function(Flash) {
+// 	var self = this;
+// 	// self.message = "Some errors!";
+// 	self.flash = Flash;
+// }]);
 
 app.controller('headerCtrl', ['Authentication', function(Authentication) {
   var self = this;

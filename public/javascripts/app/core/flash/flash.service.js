@@ -14,7 +14,7 @@ angular.
     //   // currentMessage = queue.shift() || "";
     //   currentMessage = '';
     // });
-    $rootScope.$on('$routeChangeSuccess', dismiss);
+    // $rootScope.$on('$routeChangeSuccess', dismiss);
     // angular.forEach(['$routeChangeSuccess', 'refreshFlash'], function(el) {
     //   $rootScope.$on(el, function(event) {
     //     currentMessage = '';
@@ -31,7 +31,7 @@ angular.
       },
       // dismiss: function() {
       //   currentMessage = '';
-      // } 
+      // }
       dismiss
     };
   }]);
