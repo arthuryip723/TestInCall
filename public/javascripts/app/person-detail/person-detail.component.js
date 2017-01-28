@@ -92,6 +92,7 @@ angular.
         var id = Flash.create('success', message, 0, {class: 'custom-class', id: 'custom-id'}, true);
       };
 
+      // For some Ajax request, I need to clear the flash. Like submitting comments.
       self.clearFlash = function () {
         Flash.clear();
       };

@@ -52,7 +52,7 @@ config(['$locationProvider', '$routeProvider', '$httpProvider',
     $httpProvider.interceptors.push('tokenInterceptor');
   }
 ]).
-run(['$rootScope', '$location', 'Authentication', function run($rootScope, $location, Authentication) {
+run(['$rootScope', '$location', 'Authentication', 'Flash', function run($rootScope, $location, Authentication, Flash) {
   // $rootScope.globals = $cookieStore.get('globals') || {};
   // if ($rootScope.globals.currentUser) {
   //     $http.defaults.headers.common['Authorization'] = 'Basic ' + $rootScope.globals.currentUser.authdata; // jshint ignore:line
@@ -83,4 +83,5 @@ run(['$rootScope', '$location', 'Authentication', function run($rootScope, $loca
       return;
     }
   });
+  $rootScope.$on('$routeChangeSuccess', Flash.clear);
 }]);
