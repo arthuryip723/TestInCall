@@ -78,44 +78,31 @@
         <div class="media-body">
           <h4 class="media-heading">Heading</h4>
           <div>{{ review.content }}</div>
-          <ul>
-            <li ng-repeat="comment in review.comments">
-              <div class="media">
-                <div class="media-left"><div style="width:128px;height:128px;">{{ comment.author.name }}</div></div>
-                <div class="media-body">
-                  <p>{{ comment.content }}</p>
+          <div ng-hide="review.commentsDisplayed">
+            <a ng-click="$ctrl.loadComments(review)" href>Load Comments</a>
+            <!-- <button ng-click="review.commentsDisplayed=true;">Load</button> -->
+          </div>
+          <div ng-if="review.commentsDisplayed">
+            <ul>
+              <li ng-repeat="comment in review.comments">
+                <div class="media">
+                  <div class="media-left"><div style="width:128px;height:128px;">{{ comment.author.name }}</div></div>
+                  <div class="media-body">
+                    <div>{{ comment.created_at }}</div>
+                    <p>{{ comment.content }}</p>
+                  </div>
                 </div>
-                <div>
-                  <a ng-click="$ctrl.loadComments(review)" href>Load Comments</a>
-                  <!-- <button ng-click="review.commentsDisplayed=true;">Load</button> -->
-                </div>
-                <div ng-if="review.commentsDisplayed">
-                  <ul>
-                    <li ng-repeat="comment in review.comments">
-                      <div class="row">
-                        <div class="col-lg-2">
-                          {{ comment.author.name }}
-                        </div>
-                        <div class="col-lg-10">
-                          <div>{{ comment.created_at }}</div>
-                          <p>
-                            {{ comment.content }}
-                          </p>
-                        </div>
-                      </div>
-                    </li>
-                  </ul>
-                  <a href ng-click="$ctrl.commentPage(review, 1)">First</a><a href ng-click="$ctrl.commentPage(review, (review.currentPage - 1) || 1)">Prev</a>
-                  <a href ng-repeat="increment in [0, 1, 2]" ng-click="$ctrl.commentPage(review, review.currentPage + increment)" ng-if="(increment == 0) || (review.currentPage + increment <= review.totalPages)">{{ review.currentPage + increment }}</a>
-                  <a href ng-click="$ctrl.commentPage(review, review.currentPage + 1 <= review.totalPages ? review.currentPage + 1 : review.totalPages)">Next</a><a href ng-click="$ctrl.commentPage(review, review.totalPages)">Last</a>
-                  <form ng-submit="$ctrl.submitComment(review)" ng-if="$ctrl.Authentication.isSignedIn()">
-                    <textarea ng-model="review.commentContent"></textarea><br><button>Comment</button>
-                  </form>
-                  <!-- <button ng-click="$ctrl.prevComments(review)">Prev Comments</button><button ng-click="$ctrl.nextComments(review)">Next Comments</button> -->
-                </div>
-              </div>
-            </li>
-          </ul>
+              </li>
+            </ul>
+            <a href ng-click="$ctrl.commentPage(review, 1)">First</a>
+            <a href ng-click="$ctrl.commentPage(review, (review.currentPage - 1) || 1)">Prev</a>
+            <a href ng-repeat="increment in [0, 1, 2]" ng-click="$ctrl.commentPage(review, review.currentPage + increment)" ng-if="(increment == 0) || (review.currentPage + increment <= review.totalPages)">{{ review.currentPage + increment }}</a>
+            <a href ng-click="$ctrl.commentPage(review, review.currentPage + 1 <= review.totalPages ? review.currentPage + 1 : review.totalPages)">Next</a>
+            <a href ng-click="$ctrl.commentPage(review, review.totalPages)">Last</a>
+            <form ng-submit="$ctrl.submitComment(review)" ng-if="$ctrl.Authentication.isSignedIn()">
+              <textarea ng-model="review.commentContent"></textarea><br><button>Comment</button>
+            </form>
+          </div>
         </div>
       </div>
     </li>
