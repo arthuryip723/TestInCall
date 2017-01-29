@@ -48,6 +48,9 @@ config(['$locationProvider', '$routeProvider', '$httpProvider',
       when('/signup-seller', {
         template: '<sign-up-seller></sign-up-seller>',
       }).
+      when('/profile', {
+        template: '<profile></profile>',
+      }).
       otherwise('/people');
     $httpProvider.interceptors.push('tokenInterceptor');
   }

@@ -1,0 +1,28 @@
+<h1>Profile</h1>
+<form ng-submit="$ctrl.submit()">
+  <div class="row">
+    <div class="col-lg-3">
+      <div class="div-image">
+        <img class="img-image" ng-src="{{ $ctrl.avatarSrc }}">
+      </div>
+      <input
+      type="file"
+      ngf-select
+      ng-model="$ctrl.avatar"
+      name="file"
+      ngf-pattern="'image/*'"
+      accept="image/*"
+      ngf-max-size="20MB"
+      custom-on-change="$ctrl.updateAvatar"
+      data-index="{{ index }}"
+      >
+    </div>
+    <div class="col-lg-9">
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" name="name" ng-model="$ctrl.name" class="form-control">
+      </div>
+    </div>
+  </div>
+  <button>Update</button>
+</form>

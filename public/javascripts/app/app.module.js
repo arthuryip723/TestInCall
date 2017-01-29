@@ -2,7 +2,7 @@
 
 var app = angular.module('inCallApp', [
   'ngRoute',
-  'angularFileUpload',
+  // 'angularFileUpload',
   'ngFileUpload',
   'core',
   'peopleList',
@@ -12,6 +12,7 @@ var app = angular.module('inCallApp', [
   'header',
   // 'ui.bootstrap',
   'ngFlash',
+  'profile',
 ]);
 
 // app.controller('flashCtrl', ['Flash', function(Flash) {

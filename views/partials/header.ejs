@@ -14,7 +14,7 @@
             <li><a href="/">Home</a></li>
             <li><a href="/about">About</a></li>
         </ul>
-      
+
     </div>
 </nav> -->
 <nav class="navbar navbar-default" ng-controller="headerCtrl as $ctrl">
@@ -39,6 +39,7 @@
                 <li ng-if='$ctrl.isSignedIn()' class="dropdown">
                   <a href class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">My InCall <span class="caret"></span></a>
                     <ul class="dropdown-menu dropdown-menu-left">
+                      <li><a href="#!/profile">My Profile</a></li>
                       <li><a href="#!/users/people">My People</a></li>
                       <li><a href="#!/people/new">Create A Person</a></li>
                       <!-- <li><a href="#">Something else here</a></li> -->
