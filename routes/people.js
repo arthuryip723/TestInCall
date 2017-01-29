@@ -83,7 +83,7 @@ router.post('/:id/comments', function(req, res, next) {
         res.send(comment);
       });
     });
-  }); 
+  });
 });
 
 router.get('/:id/reviews', function(req, res, next) {
@@ -205,6 +205,8 @@ router.get('/:id', function(req, res, next) {
       address: 1,
       reviews: 1,
       created_at: 1,
+      avatar: 1,
+      gallery: 1,
       avgRating: { $avg: '$reviews.rating'}
     } }).exec(function (err, persons) {
       // console.log(persons)
