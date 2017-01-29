@@ -76,7 +76,7 @@
   <ul>
     <li ng-repeat="review in $ctrl.reviews">
       <div class="media">
-        <div class="media-left"><div style="width:128px;height:128px;">{{ review.author.name }}</div></div>
+        <div class="media-left"><div style="width:128px;height:128px;"><img src="http://www.w3schools.com/bootstrap/img_avatar1.png" style="max-width:96px;max-height:96px;">{{ review.author.name }}</div></div>
         <div class="media-body">
           <h4 class="media-heading">Heading</h4>
           <div>{{ review.content }}</div>
@@ -88,7 +88,7 @@
             <ul>
               <li ng-repeat="comment in review.comments">
                 <div class="media">
-                  <div class="media-left"><div style="width:128px;height:128px;">{{ comment.author.name }}</div></div>
+                  <div class="media-left"><div style="width:128px;height:128px;"><img src="http://www.w3schools.com/bootstrap/img_avatar2.png" style="max-width:96px;max-height:96px;">{{ comment.author.name }}</div></div>
                   <div class="media-body">
                     <div>{{ comment.created_at }}</div>
                     <p>{{ comment.content }}</p>
