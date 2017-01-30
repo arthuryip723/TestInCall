@@ -18,6 +18,7 @@ angular.
         // don't show the comment when first load
         // set a flag for each review to be false at first
         // load comment will toggle that flag
+        // self.person.avgRating = self.person.avgRating || 0;
         self.totalPages = Math.ceil(person.reviews.length / 5);
       });
 
@@ -37,6 +38,14 @@ angular.
       // });
 
       self.rating = "3";
+      // self.faceRating = 3;
+      // self.figureRating = 3;
+      // self.serviceRating = 3;
+      // self.priceRating = 3;
+      // // Price-Performance Ratio
+      // self.pprRating = 3;
+
+      // self.firstRate = 3;
 
       // self.maxReviewPage = function () {
       //   // debugger
@@ -52,17 +61,17 @@ angular.
         return sum / self.person.comments.length;
       };
 
-      self.submit = function() {
-        // console.log("submitting...");
-        // console.log(self.content);
-        // submit the comment to server
-        // first build a resource for accessing comments
-        // console.log(self.rating);
-        Comment.save({id: $routeParams.personId}, {content: self.content, rating: self.rating}, function(comment) {
-          self.person.comments.push(comment);
-        });
-        self.content = '';
-      };
+      // self.submit = function() {
+      //   // console.log("submitting...");
+      //   // console.log(self.content);
+      //   // submit the comment to server
+      //   // first build a resource for accessing comments
+      //   // console.log(self.rating);
+      //   Comment.save({id: $routeParams.personId}, {content: self.content, rating: self.rating}, function(comment) {
+      //     self.person.comments.push(comment);
+      //   });
+      //   self.content = '';
+      // };
 
       self.submitReview = function () {
         // if (Flash.getMessage()) Flash.dismiss();
@@ -71,7 +80,15 @@ angular.
         // return;
         // console.log('submittin review...');
         // return;
-        Review.save({personId: $routeParams.personId}, { content: self.content, rating: self.rating }, function(review) {
+        Review.save({personId: $routeParams.personId}, {
+            content: self.content,
+            rating: self.rating,
+            // faceRating: self.faceRating,
+            // figureRating: self.figureRating,
+            // serviceRating: self.serviceRating,
+            // priceRating: self.priceRating,
+            // pprRating: self.pprRating,
+          }, function(review) {
           // self.reviews.unshift(review);
           // self.reviews = self.reviews.slice(0, 5);
           self.reviewPage(1);

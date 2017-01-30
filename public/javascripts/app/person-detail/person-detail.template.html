@@ -29,7 +29,9 @@
       </div>
       <div>
         <h4>Average Rating</h4>
-        <p>{{ $ctrl.person.avgRating }}</p>
+        <!-- <p>{{ $ctrl.person.avgRating }}</p> -->
+        <jk-rating-stars rating="$ctrl.person.avgRating" read-only="true"></jk-rating-stars>
+        <div>{{ $ctrl.person.avgRating }} stars</div>
       </div>
     </div>
   </div>
@@ -157,17 +159,33 @@
   <a href ng-click="$ctrl.reviewPage(1)">First</a><a href ng-click="$ctrl.reviewPage(($ctrl.currentPage - 1) || 1)">Prev</a>
   <a href ng-repeat="increment in [0, 1, 2]" ng-click="$ctrl.reviewPage($ctrl.currentPage + increment)" ng-if="(increment == 0) || ($ctrl.currentPage + increment <= $ctrl.totalPages)">{{ $ctrl.currentPage + increment }}</a>
   <a href ng-click="$ctrl.reviewPage($ctrl.currentPage + 1 <= $ctrl.totalPages ? $ctrl.currentPage + 1 : $ctrl.totalPages)">Next</a><a href ng-click="$ctrl.reviewPage($ctrl.totalPages)">Last</a>
-  <form ng-submit="$ctrl.submitReview()">
-    <label for="rating">Rating:</label>
-    <select name="rating" ng-model="$ctrl.rating">
-      <option value="1">1</option>
-      <option value="2">2</option>
-      <option value="3">3</option>
-      <option value="4">4</option>
-      <option value="5">5</option>
-    </select>
-    <p>Add a review</p>
-    <textarea ng-model="$ctrl.content"></textarea><br>
-    <button>Review</button>
-  </form>
 </div> -->
+<form ng-submit="$ctrl.submitReview()">
+  <label for="rating">Rating:</label>
+  <!-- <select name="rating" ng-model="$ctrl.rating">
+    <option value="1">1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+    <option value="4">4</option>
+    <option value="5">5</option>
+  </select> -->
+  <jk-rating-stars rating="$ctrl.rating"></jk-rating-stars>
+  <div>{{ $ctrl.rating }} stars</div>
+  <!-- <div class="row">
+    <div class="col-lg-2">
+      <div>Face:</div>
+    </div>
+    <div class="col-lg-10">
+      <jk-rating-stars rating="$ctrl.faceRating"></jk-rating-stars>
+    </div>
+  </div>
+  <div>
+    <span style="font-size:24px;">Figure:</span>
+    <jk-rating-stars rating="$ctrl.figureRating" style="display:inline-block;"></jk-rating-stars>
+  </div>
+  <jk-rating-stars rating="$ctrl.serviceRating"></jk-rating-stars>
+  <jk-rating-stars rating="$ctrl.priceRating"></jk-rating-stars> -->
+  <p>Add a review</p>
+  <textarea ng-model="$ctrl.content"></textarea><br>
+  <button>Review</button>
+</form>

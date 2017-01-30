@@ -210,6 +210,7 @@ router.get('/:id', function(req, res, next) {
       avgRating: { $avg: '$reviews.rating'}
     } }).exec(function (err, persons) {
       // console.log(persons)
+      persons[0].avgRating = persons[0].avgRating || 0;
       res.send(persons[0]);
     });
 });

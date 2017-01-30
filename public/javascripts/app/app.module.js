@@ -13,6 +13,7 @@ var app = angular.module('inCallApp', [
   // 'ui.bootstrap',
   'ngFlash',
   'profile',
+  'jkAngularRatingStars',
 ]);
 
 // app.controller('flashCtrl', ['Flash', function(Flash) {
