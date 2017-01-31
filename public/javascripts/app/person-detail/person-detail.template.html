@@ -171,7 +171,12 @@
   </select> -->
   <jk-rating-stars rating="$ctrl.rating"></jk-rating-stars>
   <div>{{ $ctrl.rating }} stars</div>
-  <!-- <div class="row">
+  <div ng-repeat="variable in ['face', 'figure', 'service', 'price', 'ppr']">
+    <span class="rating-label" style="text-transform: capitalize;display:inline-block;width:120px;">{{ variable }}:</span>
+    <jk-rating-stars class="rating-stars" rating="$ctrl[variable + 'Rating']"></jk-rating-stars>
+    <span class="stars-text">{{ $ctrl[variable + 'Rating'] }} stars</span>
+  </div>
+  <div class="row">
     <div class="col-lg-2">
       <div>Face:</div>
     </div>
@@ -180,11 +185,12 @@
     </div>
   </div>
   <div>
-    <span style="font-size:24px;">Figure:</span>
-    <jk-rating-stars rating="$ctrl.figureRating" style="display:inline-block;"></jk-rating-stars>
+    <span class="rating-label">Figure:</span>
+    <jk-rating-stars class="rating-stars" rating="$ctrl.figureRating"></jk-rating-stars>
+    <span class="stars-text">{{ $ctrl.figureRating }} stars</span>
   </div>
   <jk-rating-stars rating="$ctrl.serviceRating"></jk-rating-stars>
-  <jk-rating-stars rating="$ctrl.priceRating"></jk-rating-stars> -->
+  <jk-rating-stars rating="$ctrl.priceRating"></jk-rating-stars>
   <p>Add a review</p>
   <textarea ng-model="$ctrl.content"></textarea><br>
   <button>Review</button>
