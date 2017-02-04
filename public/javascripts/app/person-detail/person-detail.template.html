@@ -82,6 +82,13 @@
         <div class="media-body">
           <h4 class="media-heading">Heading</h4>
           <div>{{ review.content }}</div>
+          <div class="pull-right">
+            <div ng-repeat="variable in ['face', 'figure', 'service', 'price', 'ppr']">
+              <span class="rating-label" style="text-transform: capitalize;display:inline-block;width:120px;">{{ variable }}:</span>
+              <jk-rating-stars class="rating-stars" rating="review[variable + 'Rating']"></jk-rating-stars>
+              <span class="stars-text">{{ review[variable + 'Rating'] }} stars</span>
+            </div>
+          </div>
           <div ng-hide="review.commentsDisplayed">
             <a ng-click="$ctrl.loadComments(review)" href>Load Comments</a>
             <!-- <button ng-click="review.commentsDisplayed=true;">Load</button> -->
@@ -176,21 +183,6 @@
     <jk-rating-stars class="rating-stars" rating="$ctrl[variable + 'Rating']"></jk-rating-stars>
     <span class="stars-text">{{ $ctrl[variable + 'Rating'] }} stars</span>
   </div>
-  <div class="row">
-    <div class="col-lg-2">
-      <div>Face:</div>
-    </div>
-    <div class="col-lg-10">
-      <jk-rating-stars rating="$ctrl.faceRating"></jk-rating-stars>
-    </div>
-  </div>
-  <div>
-    <span class="rating-label">Figure:</span>
-    <jk-rating-stars class="rating-stars" rating="$ctrl.figureRating"></jk-rating-stars>
-    <span class="stars-text">{{ $ctrl.figureRating }} stars</span>
-  </div>
-  <jk-rating-stars rating="$ctrl.serviceRating"></jk-rating-stars>
-  <jk-rating-stars rating="$ctrl.priceRating"></jk-rating-stars>
   <p>Add a review</p>
   <textarea ng-model="$ctrl.content"></textarea><br>
   <button>Review</button>

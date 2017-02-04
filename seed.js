@@ -1,24 +1,24 @@
- 
+
 // var seeder = require('mongoose-seed');
- 
-// // Connect to MongoDB via Mongoose 
+
+// // Connect to MongoDB via Mongoose
 // seeder.connect('mongodb://localhost/incall', function() {
- 
-//     // Load Mongoose models 
+
+//     // Load Mongoose models
 //     seeder.loadModels([
 //         'models/person.js',
 //     ]);
- 
-//     // Clear specified collections 
+
+//     // Clear specified collections
 //     seeder.clearModels(['Person',], function() {
- 
-//         // Callback to populate DB once collections have been cleared 
+
+//         // Callback to populate DB once collections have been cleared
 //         seeder.populateModels(data);
- 
+
 //     });
 // });
- 
-// // Data array containing seed data - documents organized by Model 
+
+// // Data array containing seed data - documents organized by Model
 // var data = [
 //     {
 //         'model': 'Person',
@@ -90,14 +90,24 @@ seller1.people.push(joe._id);
 var review1 = new Review({
     content: "Alex is great.",
     person: alex._id,
-    rating: 5,
     author: buyer1._id,
+    rating: 5,
+    faceRating: 1,
+    figureRating: 2,
+    serviceRating: 3,
+    priceRating: 4,
+    pprRating: 5,
 });
 var review2 = new Review({
     content: 'Joe is so-so.',
     person: joe._id,
-    rating: 1,
     author: buyer2._id,
+    rating: 1,
+    faceRating: 5,
+    figureRating: 4,
+    serviceRating: 3,
+    pricerat: 2,
+    pprRating: 1,
 });
 review1.save();
 review2.save();
@@ -129,7 +139,7 @@ review2.save();
 
 // console.log("-----------------");
 
-// var aaron = new Person({ 
+// var aaron = new Person({
 //   name: 'Aaron',
 //   reviews: [{content: 'Aaron is awesome.', rating: 1}],
 // });

@@ -38,12 +38,12 @@ angular.
       // });
 
       self.rating = "3";
-      // self.faceRating = 3;
-      // self.figureRating = 3;
-      // self.serviceRating = 3;
-      // self.priceRating = 3;
-      // // Price-Performance Ratio
-      // self.pprRating = 3;
+      self.faceRating = 3;
+      self.figureRating = 3;
+      self.serviceRating = 3;
+      self.priceRating = 3;
+      // Price-Performance Ratio
+      self.pprRating = 3;
 
       // self.firstRate = 3;
 
