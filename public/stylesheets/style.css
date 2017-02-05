@@ -82,10 +82,14 @@ textarea.description-textarea {
 }
 
 .rating-label, .stars-text {
-  font-size: 18px;
+  font-size: 14px;
 }
 
 .rating-stars {
   display: inline-block;
   vertical-align: middle;
+}
+
+.rating-stars .button .material-icons {
+  font-size: 18px;
 }
