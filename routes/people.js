@@ -52,17 +52,34 @@ router.get('/', function(req, res, next) {
   //   res.send(people);
   // });
   // console.log(req.query.order);
-  let sortByObj = req.query.order == 'newest' ? {'created_at': -1} : {'avgRating': -1};
+  // let sortByObj = req.query.order == 'newest' ? {'created_at': -1} : {'avgRating': -1};
+  let sorByObj;
+  switch (req.query.order) {
+    case 'newest':
+      sortByObj = { 'created_at': -1 };
+      break;
+    case 'rating':
+      sortByObj = { 'avgRating': -1 };
+      break;
+    case 'face':
+      sortByObj = { 'avgFace': -1 };
+      break;
+    default:
+      sortByObj = {'created_at': -1}
+  }
   Person.aggregate([{
-    '$project':{
+      '$project':{
         'name': 1,
         'avatar': 1,
         'avgRating': {
-            '$avg': '$reviews.rating'
-            },
-        'created_at': 1,
+          '$avg': '$reviews.rating'
         },
-    // }, {'$sort': {'avgRating': -1}}]).exec(function(err, people) {
+        'avgFace': {
+          '$avg': '$reviews.faceRating'
+        },
+        'created_at': 1,
+      },
+      // }, {'$sort': {'avgRating': -1}}]).exec(function(err, people) {
     }, {'$sort': sortByObj }]).exec(function(err, people) {
     res.send(people);
   });
