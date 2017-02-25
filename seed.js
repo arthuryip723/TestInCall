@@ -32,7 +32,7 @@
 //         ]
 //     }
 // ];
-require('./database');
+var mongoose = require('./database');
 
 var Person = require('./models/person');
 var Comment = require('./models/comment');
@@ -153,3 +153,5 @@ review2.save();
 // comment3.save();
 // aaron.comments.push(comment3._id);
 // aaron.save();
+
+mongoose.connection.close()
