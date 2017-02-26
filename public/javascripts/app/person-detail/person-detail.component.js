@@ -97,6 +97,7 @@ angular.
           // console.log(resp.data.error);
           // Flash.setMessage(resp.data.error);
           // console.log(Flash.getM}}}essage());
+          Flash.create('danger', '<strong>' + resp.data.error + '</strong>', 0, { calss: 'custom-class', id: 'custom-id'}, true);
         });
         self.content = '';
         Review.count({ personId: $routeParams.personId }, function (resp) {
