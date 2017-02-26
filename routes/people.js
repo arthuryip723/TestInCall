@@ -268,7 +268,7 @@ router.post('/', upload, function(req, res, next) {
       address: req.body.address,
       user: user._id,
       gallery,
-      avatar: req.files.avatar[0].filename,
+      avatar: req.files.avatar ? req.files.avatar[0].filename : null,
     });
     person.save(function(err, person) {
       user.people.push(person);
