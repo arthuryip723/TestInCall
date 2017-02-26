@@ -265,6 +265,7 @@ router.post('/', upload, function(req, res, next) {
       name: req.body.name,
       description: req.body.description,
       phone: req.body.phone,
+      address: req.body.address,
       user: user._id,
       gallery,
       avatar: req.files.avatar[0].filename,

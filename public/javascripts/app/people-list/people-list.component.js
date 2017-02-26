@@ -101,6 +101,7 @@ angular.
             name: self.name,
             description: self.description,
             phone: self.phone,
+            address: self.address,
           },
           // fields: {name: self.name},
         }).then(function (resp) {
