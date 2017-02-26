@@ -40,8 +40,8 @@
                   <a href class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">My InCall <span class="caret"></span></a>
                     <ul class="dropdown-menu dropdown-menu-left">
                       <li><a href="#!/profile">My Profile</a></li>
-                      <li><a href="#!/users/people">My People</a></li>
-                      <li><a href="#!/people/new">Create A Person</a></li>
+                      <li ng-if="$ctrl.isSeller()"><a href="#!/users/people">My People</a></li>
+                      <li ng-if="$ctrl.isSeller()"><a href="#!/people/new">Create A Person</a></li>
                       <!-- <li><a href="#">Something else here</a></li> -->
                       <!-- <li role="separator" class="divider"></li>
                       <li class="dropdown-header">Nav header</li>

@@ -16,6 +16,7 @@ angular.
           Authentication.signIn({name: self.name, password: self.password});
         };
         self.signOut = Authentication.signOut;
+        self.isSeller = Authentication.isSeller;
         // self.isLoggedIn = function(){
         //   console.log('hello');
         //   return true;
