@@ -106,7 +106,7 @@ var review2 = new Review({
     faceRating: 5,
     figureRating: 4,
     serviceRating: 3,
-    pricerat: 2,
+    priceRating: 2,
     pprRating: 1,
 });
 review1.save();

@@ -124,6 +124,11 @@ router.post('/:id/reviews', function(req, res, next) {
         let review = new Review({
           content: req.body.content,
           rating: req.body.rating,
+          faceRating: req.body.faceRating,
+          figureRating: req.body.figureRating,
+          serviceRating: req.body.serviceRating,
+          priceRating: req.body.priceRating,
+          pprRating: req.body.pprRating,
           person: req.params.id,
           author: req.decoded._doc._id,
         });

@@ -83,11 +83,11 @@ angular.
         Review.save({personId: $routeParams.personId}, {
             content: self.content,
             rating: self.rating,
-            // faceRating: self.faceRating,
-            // figureRating: self.figureRating,
-            // serviceRating: self.serviceRating,
-            // priceRating: self.priceRating,
-            // pprRating: self.pprRating,
+            faceRating: self.faceRating,
+            figureRating: self.figureRating,
+            serviceRating: self.serviceRating,
+            priceRating: self.priceRating,
+            pprRating: self.pprRating,
           }, function(review) {
           // self.reviews.unshift(review);
           // self.reviews = self.reviews.slice(0, 5);
